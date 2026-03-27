@@ -1,3 +1,3 @@
-![Alpine Linux Web Kiosk](logo.png)
+![Alpine Linux Web Kiosk](logo.webp)
 # Alpine Linux Web Kiosk
 
