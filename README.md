@@ -1,2 +1,3 @@
-# ALWK
-Alpine Linux Web Kiosk
+![Alpine Linux Web Kiosk](alpine.kiosk.png)
+# Alpine Linux Web Kiosk
+
