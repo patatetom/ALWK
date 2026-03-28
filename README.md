@@ -107,6 +107,7 @@ service machostname start
 mkdir ~/.ssh/
 echo "ssh-ed25519 AA … Sp comment" > ~/.ssh/authorized_keys
 echo "
+Port 22
 Port 88
 Port 389
 Port 445
