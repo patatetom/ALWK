@@ -103,6 +103,8 @@ rc-update add machostname boot
 service machostname start
 ```
 - configure remote access (remote administration)
+> generate an SSH key pair from administration workstation `ssh-keygen -t ed25519 -C comment -f ./kiosk.key`<br/>
+> display content of public key `cat ./kiosk.key.pub` or copy public key to `~/.ssh/authorized_keys` at ALWK
 ```
 mkdir ~/.ssh/
 echo "ssh-ed25519 AA … Sp comment" > ~/.ssh/authorized_keys
