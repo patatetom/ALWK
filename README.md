@@ -24,7 +24,7 @@ ALWK is a web kiosk based on [Alpine Linux](https://www.alpinelinux.org/) (3.23)
   - full name `Browser`
   - password `chromium`
   - retype password `chromium`
-  - ssh/url `none`
+  - ssh key or URL `none`
   - ssh server `openssh`
   - allow root ssh `prohibit-password`
   - ssh key or URL `none`
