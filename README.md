@@ -170,7 +170,7 @@ tty1::respawn:/bin/login -f browser
 ::shutdown:/sbin/openrc shutdown -q > /dev/null
 ~~~
 ```
-- configure login for browser user (graphics server automatic startup at login)
+- configure login for `browser` user (graphics server automatic startup at login)
 ```
 cat > /home/browser/.profile <<~~~
 clear
