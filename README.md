@@ -127,7 +127,7 @@ Section "ServerFlags"
 EndSection
 ~~~
 ```
-- add Xorg extension `apk add xf86-input-synaptics setxkbmap font-dejavu ttf-freefont`
+- add Xorg extensions `apk add xf86-input-synaptics setxkbmap font-dejavu ttf-freefont`
 - add simple window manager `apk add jwm`
 - add browser `apk add chromium chromium-lang`
 - set up local HTTP server
