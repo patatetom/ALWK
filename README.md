@@ -229,3 +229,10 @@ jwm -exit
 
 
 ## Chromium configuration
+
+> _TODO_
+
+
+## web kiosk customization
+
+> _TODO_
