@@ -220,8 +220,12 @@ chromium \
   grep -E '^http(s)?://' "$urls" ||
   echo http://localhost:8888
   )
+# rm -rf ~/.config/chromium
 jwm -exit
 </StartupCommand>
 </JWM>
 ~~~
 ```
+
+
+## Chromium configuration
