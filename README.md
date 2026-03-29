@@ -7,6 +7,7 @@ ALWK is a web kiosk based on [Alpine Linux](https://www.alpinelinux.org/) (3.23)
 
 ## installation
 
+> changes may be necessary (keyboard `fr`, disk `sda`, …)<br/>
 > prefer installation under EFI/UEFI, especially if it is performed to removable media<br/>
 > see also https://docs.alpinelinux.org/ and https://wiki.alpinelinux.org/wiki/Installation for more informations
 
@@ -42,10 +43,12 @@ ALWK is a web kiosk based on [Alpine Linux](https://www.alpinelinux.org/) (3.23)
 
 ## configuration
 
+> changes may be necessary (disk `sda`, …)
+
 - login as `root` with defined password
 - modify EFI System Partition (ESP)
 > installation is assumed to have been performed under EFI/UEFI<br/>
-> if this is not the case, only run `dosfslabel …` command
+> if this is not case, only run `dosfslabel …` command
 ```
 apk add gptfdisk
 gdisk /dev/sda <<~~~
@@ -141,14 +144,15 @@ EndSection
 - setup default web page
 ```
 rc-update add local default
-cat > /etc/local.d/home.page.start <<\~~~
+cat > /etc/local.d/default.web.page.start <<\~~~
 mkdir -p "${root:=/boot/efi/www}"
 [ -f "${index:=$root/index.html}" ] ||
 echo '<html style="background-color:#0E5980">
 <h1 style="color:#FFFFFF;text-align:center">
 <br/><br/><br/>Alpine Linux Web Kiosk</h1></html>' > "$index"
 ~~~
-chmod +x /etc/local.d/home.page.start
+chmod +x /etc/local.d/default.web.page.start
+service local start
 ```
 - configure system initialization (minimum, silent, and auto-login for `browser` user)
 > **no console access with this `/etc/inittab` configuration**<br/>
@@ -192,7 +196,6 @@ exec jwm
 ~~~
 ```
 - set up web browser auto-start
-> web browser will open URLs stored in `urls.txt` file located in root directory of first partition
 ```
 cat > /home/browser/.jwmrc <<\~~~
 <?xml version="1.0" encoding="UTF-8"?>
