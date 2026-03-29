@@ -76,7 +76,7 @@ sed -i 's/^wheel:x:10:root,browser/wheel:x:10:root/' /etc/group
 ```
 - add widest hardware support (ALWK on a USB device) `apk add linux-firmware`
 > see https://wiki.alpinelinux.org/wiki/Kernels#Firmware for more informations
-- modify GRUB loader
+- modify GRUB loader (quiet boot)
 ```
 chmod -x /etc/grub.d/*
 chmod +x /etc/grub.d/00_header
