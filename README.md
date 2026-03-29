@@ -139,6 +139,7 @@ EndSection
 - add simple window manager `apk add jwm`
 - add Chromium browser `apk add chromium chromium-lang`
 - set up local HTTP server
+> this server will serve `index.html` file located in `/www/` folder on first partition (mounted at `/boot/efi/` by ALWK)
 ```
 rc-update add local default
 cat > /etc/local.d/python.httpd.start <<\~~~
