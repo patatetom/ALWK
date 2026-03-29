@@ -158,7 +158,7 @@ kill $( ps | awk '$2~/browser/ && $4~/python/ {print $1}' ) &> /dev/null
 chmod +x /etc/local.d/python.httpd.stop
 ```
 - configure system initialization (minimum, silent, and auto-login for `browser` user)
-> no console access with this `/etc/inittab` configuration<br/>
+> **no console access with this `/etc/inittab` configuration**<br/>
 > uncomment `#tty2::respawn:/sbin/getty 38400 tty2` for console access<br/>
 > and/or uncomment `#ttyS0::respawn:/sbin/getty -L 0 ttyS0 vt100` for serial console access (Qemu)<br/>
 > and/or access ALWK via secure shell
