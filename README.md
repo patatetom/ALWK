@@ -6,7 +6,7 @@ ALWK is a web kiosk based on [Alpine Linux](https://www.alpinelinux.org/) (3.23)
 
 ## installation
 
-- boot ISO Alpine Linux image on the future web kiosk
+- boot Alpine Linux ISO image on PC containing media for the future web kiosk
 - login as `root` without a password (empty password)
 - start installation with `KERNELOPTS="quiet mitigations=off" ROOTFS=btrfs setup-alpine`
   - keymap `fr`
@@ -104,7 +104,7 @@ service machostname start
 ```
 - configure remote access (remote administration)
 > generate an SSH key pair from administration workstation `ssh-keygen -t ed25519 -C comment -f ./kiosk.key`<br/>
-> display content of public key `cat ./kiosk.key.pub` or copy public key to `~/.ssh/authorized_keys` at ALWK
+> use content of public key `cat ./kiosk.key.pub` or copy public key to `~/.ssh/authorized_keys` at ALWK
 ```
 mkdir ~/.ssh/
 echo "ssh-ed25519 AA … Sp comment" > ~/.ssh/authorized_keys
@@ -127,9 +127,9 @@ Section "ServerFlags"
 EndSection
 ~~~
 ```
-- add Xorg extensions `apk add xf86-input-synaptics setxkbmap font-dejavu ttf-freefont`
+- add graphics server extensions `apk add xf86-input-synaptics setxkbmap font-dejavu ttf-freefont`
 - add simple window manager `apk add jwm`
-- add browser `apk add chromium chromium-lang`
+- add Chromium browser `apk add chromium chromium-lang`
 - set up local HTTP server
 ```
 rc-update add local default
@@ -148,11 +148,11 @@ kill $( ps | awk '$2~/browser/ && $4~/python/ {print $1}' ) &> /dev/null
 ~~~
 chmod +x /etc/local.d/python.httpd.stop
 ```
-- configure system initialization (minimum, silent, and auto-login for browser user)
-> ⚠️ WARNING : no console access with this `/etc/inittab` configuration<br/>
+- configure system initialization (minimum, silent, and auto-login for `browser` user)
+> no console access with this `/etc/inittab` configuration<br/>
 > uncomment `#tty2::respawn:/sbin/getty 38400 tty2` for console access<br/>
 > and/or uncomment `#ttyS0::respawn:/sbin/getty -L 0 ttyS0 vt100` for serial console access (Qemu)<br/>
-> and/or access ALWK via SSH
+> and/or access ALWK via secure shell
 
 ```
 cat > /etc/inittab <<~~~
@@ -190,7 +190,7 @@ xset s noblank
 exec jwm
 ~~~
 ```
-- set up browser auto-start
+- set up web browser auto-start
 ```
 cat > /home/browser/.jwmrc <<\~~~
 <?xml version="1.0" encoding="UTF-8"?>
