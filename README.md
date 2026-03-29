@@ -4,6 +4,7 @@
 ALWK is a web kiosk based on [Alpine Linux](https://www.alpinelinux.org/) (3.23) and [Chromium](https://www.chromium.org/Home/) (146.0).
 
 
+
 ## installation
 
 - boot Alpine Linux ISO image on PC containing media for the future web kiosk
@@ -35,10 +36,13 @@ ALWK is a web kiosk based on [Alpine Linux](https://www.alpinelinux.org/) (3.23)
 - reboot `reboot`
 
 
+
 ## configuration
 
 - login as `root` with defined password
 - modify EFI System Partition (ESP)
+> installation is assumed to have been performed under EFI/UEFI<br/>
+> if this is not the case, only run `dosfslabel …` command
 ```
 apk add gptfdisk
 gdisk /dev/sda <<~~~
@@ -107,7 +111,7 @@ service machostname start
 > use content of public key `cat ./kiosk.key.pub` or copy public key to `~/.ssh/authorized_keys` at ALWK
 ```
 mkdir ~/.ssh/
-echo "ssh-ed25519 AA … Sp comment" > ~/.ssh/authorized_keys
+echo "ssh-ed25519 AA … … … Sp comment" > ~/.ssh/authorized_keys
 echo "
 Port 22
 Port 88
