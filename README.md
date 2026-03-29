@@ -7,6 +7,8 @@ ALWK is a web kiosk based on [Alpine Linux](https://www.alpinelinux.org/) (3.23)
 
 ## installation
 
+> if needed, see also https://docs.alpinelinux.org/ and https://wiki.alpinelinux.org/wiki/Installation
+
 - boot Alpine Linux ISO image on PC containing media for the future web kiosk
 - login as `root` without a password (empty password)
 - start installation with `KERNELOPTS="quiet mitigations=off" ROOTFS=btrfs setup-alpine`
