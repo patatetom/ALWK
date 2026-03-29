@@ -272,3 +272,9 @@ https://github.com/patatetom/ALWK/
 > `/boot/efi/www/index.html` on ALWK
 
 `index.html` file, stored in `/www/` folder located in root of first partition, is default web page opened by browser and can be easily updated and expanded
+
+
+
+---
+
+[![boot screencast](boot.webp)](boot.large.webp)
