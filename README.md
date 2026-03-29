@@ -50,7 +50,7 @@ ALWK is a web kiosk based on [Alpine Linux](https://www.alpinelinux.org/) (3.23)
 - modify EFI System Partition (ESP)
 > installation is assumed to have been performed under EFI/UEFI<br/>
 > if this is not case, only run `dosfslabel …` command
-```
+```sh
 apk add gptfdisk
 gdisk /dev/sda <<~~~
 t
@@ -74,14 +74,14 @@ echo 'drive e: file="/dev/sda1"' > /etc/mtools.conf
 mattrib +h +s e:/efi 2> /dev/null
 ```
 - make few minor changes
-```
+```sh
 echo -n | tee /etc/issue > /etc/motd
 sed -i 's/^wheel:x:10:root,browser/wheel:x:10:root/' /etc/group
 ```
 - add widest hardware support (ALWK on a USB device) `apk add linux-firmware`
 > see https://wiki.alpinelinux.org/wiki/Kernels#Firmware for more informations
 - modify GRUB loader (quiet boot)
-```
+```sh
 chmod -x /etc/grub.d/*
 chmod +x /etc/grub.d/00_header
 chmod +x /etc/grub.d/10_linux
@@ -94,7 +94,7 @@ sed -e 's/Loading Linux lts/Loading kiosk/' \
     -e '/Loading initial ramdisk/d' > /boot/grub/grub.cfg
 ```
 - make dynamic hostname (MAC based / multiple kiosks on same LAN)
-```
+```sh
 cat > /etc/init.d/machostname <<\~~~
 #!/sbin/openrc-run
 depend()
@@ -117,7 +117,7 @@ service machostname start
 - configure remote access (remote administration)
 > generate an SSH key pair from administration workstation `ssh-keygen -t ed25519 -C comment -f ./kiosk.key`<br/>
 > use content of public key `cat ./kiosk.key.pub` or copy public key to `~/.ssh/authorized_keys` at ALWK
-```
+```sh
 mkdir ~/.ssh/
 echo "ssh-ed25519 AA … … … Sp comment" > ~/.ssh/authorized_keys
 echo "
@@ -130,7 +130,7 @@ Port 636
 service sshd restart
 ```
 - install graphics server
-```
+```sh
 setup-xorg-base
 cat > /etc/X11/xorg.conf <<~~~
 Section "ServerFlags"
@@ -143,7 +143,7 @@ EndSection
 - add simple window manager `apk add jwm`
 - add Chromium browser `apk add chromium chromium-lang`
 - setup default web page
-```
+```sh
 rc-update add local default
 cat > /etc/local.d/default.web.page.start <<\~~~
 mkdir -p "${root:=/boot/efi/www}"
@@ -160,7 +160,7 @@ service local start
 > uncomment `#tty2::respawn:/sbin/getty 38400 tty2` for console access<br/>
 > and/or uncomment `#ttyS0::respawn:/sbin/getty -L 0 ttyS0 vt100` for serial console access (Qemu)<br/>
 > and/or access ALWK via secure shell
-```
+```sh
 cat > /etc/inittab <<~~~
 ::sysinit:clear
 ::sysinit:echo Starting kiosk ...
@@ -177,7 +177,7 @@ tty1::respawn:/bin/login -f browser
 ~~~
 ```
 - configure login for `browser` user (graphics server automatic startup at login)
-```
+```sh
 cat > /home/browser/.profile <<~~~
 clear
 echo "Starting browser ..."
@@ -187,7 +187,7 @@ exec startx &>/dev/null
 ~~~
 ```
 - configure window manager's startup
-```
+```sh
 cat > /home/browser/.xinitrc <<~~~
 setxkbmap fr
 xset -dpms
@@ -197,7 +197,7 @@ exec jwm
 ~~~
 ```
 - set up web browser auto-start
-```
+```sh
 cat > /home/browser/.jwmrc <<\~~~
 <?xml version="1.0" encoding="UTF-8"?>
 <JWM>
@@ -238,7 +238,7 @@ jwm -exit
 ## Chromium configuration
 
 - disable `file://` scheme (except for default web page)
-```
+```sh
 mkdir -p /etc/chromium/policies/managed/
 cat > /etc/chromium/policies/managed/block_file.json <<~~~
 {
@@ -258,7 +258,7 @@ cat > /etc/chromium/policies/managed/block_file.json <<~~~
 
 `urls.txt` file, located in root directory of first partition, tells browser which web page(s) to open and can be easily installed and configured
 
-```
+```ini
 # keep default updated web page for user informations (kiosk guide)
 file:///boot/efi/www/index.html
 # DuckDuckGo
