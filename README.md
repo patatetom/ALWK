@@ -43,7 +43,7 @@ ALWK is a web kiosk based on [Alpine Linux](https://www.alpinelinux.org/) (3.23)
 
 ## configuration
 
-> changes may be necessary (disk `sda`, …) : **be sure to select correct disk if there are multiple available**
+> changes may be necessary (SSH public key, disk `sda`, …) : **be sure to select correct disk if there are multiple available**
 
 - boot ALWK from media storage selected during installation
 - login as `root` with defined password
