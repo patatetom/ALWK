@@ -223,7 +223,7 @@ chromium \
   --noerrdialogs \
   $(
   [ -f "${urls:=/boot/efi/urls.txt}" ] &&
-  grep -E '^http(s)?://' "$urls" ||
+  grep -E '^(file|http(s)?)://' "$urls" ||
   echo file:///boot/efi/www/index.html
   )
 rm -rf ~/.config/chromium
