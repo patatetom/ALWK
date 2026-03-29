@@ -7,11 +7,11 @@ ALWK is a web kiosk based on [Alpine Linux](https://www.alpinelinux.org/) (3.23)
 
 ## installation
 
-> changes may be necessary (keyboard `fr`, disk `sda`, …)<br/>
+> changes may be necessary (keyboard `fr`, disk `sda`, …) : **be sure to select correct disk if there are multiple available**<br/>
 > prefer installation under EFI/UEFI, especially if it is performed to removable media<br/>
 > see also https://docs.alpinelinux.org/ and https://wiki.alpinelinux.org/wiki/Installation for more informations
 
-- boot Alpine Linux ISO image on PC containing media for the future web kiosk
+- boot Alpine Linux ISO image on PC containing media storage for the future web kiosk
 - login as `root` without a password (empty password)
 - start installation with `KERNELOPTS="quiet mitigations=off" ROOTFS=btrfs setup-alpine`
   - keymap `fr`
@@ -43,8 +43,9 @@ ALWK is a web kiosk based on [Alpine Linux](https://www.alpinelinux.org/) (3.23)
 
 ## configuration
 
-> changes may be necessary (disk `sda`, …)
+> changes may be necessary (disk `sda`, …) : **be sure to select correct disk if there are multiple available**
 
+- boot ALWK from media storage selected during installation
 - login as `root` with defined password
 - modify EFI System Partition (ESP)
 > installation is assumed to have been performed under EFI/UEFI<br/>
