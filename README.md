@@ -139,7 +139,7 @@ EndSection
 - add simple window manager `apk add jwm`
 - add Chromium browser `apk add chromium chromium-lang`
 - set up local HTTP server
-> this server will serve `index.html` file located in `/www/` folder on first partition (mounted at `/boot/efi/` by ALWK)
+> this server will serve `index.html` file located in `/www/` folder at root of first partition (mounted at `/boot/efi/` by ALWK)
 ```
 rc-update add local default
 cat > /etc/local.d/python.httpd.start <<\~~~
@@ -238,11 +238,32 @@ jwm -exit
 ```
 
 
+
 ## Chromium configuration
 
 > _TODO_
 
 
+
 ## web kiosk customization
 
-> _TODO_
+### `%part1%/urls.txt`
+
+> `/boot/efi/urls.txt` on ALWK
+
+`urls.txt` file, located in root directory of first partition, tells browser which web page(s) to open
+
+```
+# keep default updated local page for user informations (kiosk guide)
+http://localhost:8888/
+# DuckDuckGo
+https://duckduckgo.com/
+# ALWK ;-)
+https://github.com/patatetom/ALWK/
+```
+
+### `%part1%/www/index.html`
+
+> `/boot/efi/www/index.html` on ALWK
+
+local HTTP server will serve `index.html` file stored in `/www/` folder located at root of  first partition
