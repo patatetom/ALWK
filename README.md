@@ -138,31 +138,23 @@ EndSection
 - add graphics server extensions `apk add xf86-input-synaptics setxkbmap font-dejavu ttf-freefont`
 - add simple window manager `apk add jwm`
 - add Chromium browser `apk add chromium chromium-lang`
-- set up local HTTP server
-> this server will serve `index.html` file located in `/www/` folder at root of first partition (mounted at `/boot/efi/` by ALWK)
+- setup default web page
 ```
 rc-update add local default
-cat > /etc/local.d/python.httpd.start <<\~~~
+cat > /etc/local.d/home.page.start <<\~~~
 mkdir -p "${root:=/boot/efi/www}"
 [ -f "${index:=$root/index.html}" ] ||
 echo '<html style="background-color:#0E5980">
 <h1 style="color:#FFFFFF;text-align:center">
 <br/><br/><br/>Alpine Linux Web Kiosk</h1></html>' > "$index"
-su -p browser -c "python -m http.server -b localhost -d '$root' 8888 &> /dev/null &"
 ~~~
-chmod +x /etc/local.d/python.httpd.start
-service local start
-cat > /etc/local.d/python.httpd.stop <<\~~~
-kill $( ps | awk '$2~/browser/ && $4~/python/ {print $1}' ) &> /dev/null
-~~~
-chmod +x /etc/local.d/python.httpd.stop
+chmod +x /etc/local.d/home.page.start
 ```
 - configure system initialization (minimum, silent, and auto-login for `browser` user)
 > **no console access with this `/etc/inittab` configuration**<br/>
 > uncomment `#tty2::respawn:/sbin/getty 38400 tty2` for console access<br/>
 > and/or uncomment `#ttyS0::respawn:/sbin/getty -L 0 ttyS0 vt100` for serial console access (Qemu)<br/>
 > and/or access ALWK via secure shell
-
 ```
 cat > /etc/inittab <<~~~
 ::sysinit:clear
@@ -228,7 +220,7 @@ chromium \
   $(
   [ -f "${urls:=/boot/efi/urls.txt}" ] &&
   grep -E '^http(s)?://' "$urls" ||
-  echo http://localhost:8888
+  echo file:///boot/efi/www/index.html
   )
 rm -rf ~/.config/chromium
 jwm -exit
@@ -241,12 +233,13 @@ jwm -exit
 
 ## Chromium configuration
 
-- disable `file://` scheme
+- disable `file://` scheme (except for default web page)
 ```
 mkdir -p /etc/chromium/policies/managed/
 cat > /etc/chromium/policies/managed/block_file.json <<~~~
 {
-  "URLBlocklist": ["file://*"]
+  "URLAllowlist": ["file:///boot/efi/www/"],
+  "URLBlocklist": ["file://"]
 }
 ~~~
 ```
@@ -259,11 +252,11 @@ cat > /etc/chromium/policies/managed/block_file.json <<~~~
 
 > `/boot/efi/urls.txt` on ALWK
 
-`urls.txt` file, located in root directory of first partition, tells browser which web page(s) to open
+`urls.txt` file, located in root directory of first partition, tells browser which web page(s) to open and can be easily installed and configured
 
 ```
-# keep default updated local page for user informations (kiosk guide)
-http://localhost:8888/
+# keep default updated web page for user informations (kiosk guide)
+file:///boot/efi/www/index.html
 # DuckDuckGo
 https://duckduckgo.com/
 # ALWK ;-)
@@ -274,4 +267,4 @@ https://github.com/patatetom/ALWK/
 
 > `/boot/efi/www/index.html` on ALWK
 
-local HTTP server will serve `index.html` file stored in `/www/` folder located at root of  first partition
+`index.html` file, stored in `/www/` folder located in root of first partition, is default web page opened by browser and can be easily updated and expanded
