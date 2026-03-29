@@ -200,6 +200,7 @@ exec jwm
 ~~~
 ```
 - set up web browser auto-start
+> web browser will open URLs stored in `urls.txt` file located in root directory of first partition
 ```
 cat > /home/browser/.jwmrc <<\~~~
 <?xml version="1.0" encoding="UTF-8"?>
