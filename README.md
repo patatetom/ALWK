@@ -241,7 +241,15 @@ jwm -exit
 
 ## Chromium configuration
 
-> _TODO_
+- disable `file://` scheme
+```
+mkdir -p /etc/chromium/policies/managed/
+cat > /etc/chromium/policies/managed/block_file.json <<~~~
+{
+  "URLBlocklist": ["file://*"]
+}
+~~~
+```
 
 
 
