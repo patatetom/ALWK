@@ -78,7 +78,10 @@ mattrib +h +s e:/efi 2> /dev/null
 ```sh
 echo -n | tee /etc/issue > /etc/motd
 sed -i 's/^wheel:x:10:root,browser/wheel:x:10:root/' /etc/group
-sed -i -r '/^\/dev\/(cdrom|usb)/d' /etc/fstab
+sed -i -r \
+  -e '/^\/dev\/(cdrom|usb)/d' \
+  -e 's/iocharset=utf8/iocharset=iso8859-1,utf8/' \
+  /etc/fstab
 ```
 - add widest hardware support (ALWK on a USB device) `apk add linux-firmware`
 > see https://wiki.alpinelinux.org/wiki/Kernels#Firmware for more informations
