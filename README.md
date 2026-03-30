@@ -127,9 +127,13 @@ service machostname start
 mkdir ~/.ssh/
 echo "ssh-ed25519 AA … … … Sp comment" > ~/.ssh/authorized_keys
 ```
-- install graphics server
+- install graphics server, applications and extensions
 ```sh
 setup-xorg-base
+apk add xf86-input-synaptics setxkbmap
+apk add font-dejavu font-inconsolata font-liberation font-linux-libertine font-noto-emoji ttf-freefont
+apk add jwm
+apk add chromium chromium-lang
 cat > /etc/X11/xorg.conf <<~~~
 Section "ServerFlags"
 	 Option "DontVTSwitch" "true"
@@ -137,9 +141,6 @@ Section "ServerFlags"
 EndSection
 ~~~
 ```
-- add graphics server extensions `apk add xf86-input-synaptics setxkbmap font-dejavu ttf-freefont`
-- add simple window manager `apk add jwm`
-- add Chromium browser `apk add chromium chromium-lang`
 - setup default web page
 ```sh
 rc-update add local default
