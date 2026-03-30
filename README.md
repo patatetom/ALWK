@@ -214,7 +214,7 @@ cat > /home/browser/.jwmrc <<\~~~
 <StartupCommand>
 yes '' | head -100 > /dev/tty1
 chromium \
-  --kiosk \
+  --start-maximized \
   --no-first-run \
   --autoplay-policy=no-user-gesture-required \
   --disable-infobars \
