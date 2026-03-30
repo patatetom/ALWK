@@ -1,16 +1,16 @@
 ![Alpine Linux Web Kiosk](logo.webp)
 # Alpine Web Kiosk
 
-AWK is a web kiosk based on [Alpine Linux](https://www.alpinelinux.org/) (3.23) and [Chromium](https://www.chromium.org/Home/) (146.0).
+AWK is a web kiosk based on [Alpine Linux](https://www.alpinelinux.org/) (3.23)
 
 
 
 ## installation
 
-> changes may be necessary (keyboard `fr`, disk `sda`, …) : **be sure to select correct disk if there are multiple available**<br/>
-> **Secure Boot must be disabled on EFI/UEFI platforms**<br/>
+> changes may be necessary (keyboard `fr`, disk `sda`, …)<br/>
+> **be sure to select correct disk if there are multiple available**<br/>
+> **Secure Boot must be disabled on EFI/UEFI platform**<br/>
 > prefer installation under EFI/UEFI, especially if it is performed to removable media<br/>
-> see also https://docs.alpinelinux.org/ and https://wiki.alpinelinux.org/wiki/Installation for more informations
 
 - boot Alpine Linux ISO image on PC containing media storage for the future web kiosk
 - login as `root` without a password (empty password)
@@ -27,7 +27,7 @@ AWK is a web kiosk based on [Alpine Linux](https://www.alpinelinux.org/) (3.23) 
   - ntp client `busybox`
   - apk mirror `c` (community) `22` (mirros.ircam.fr)
   - user `browser`
-  - full name `Browser`
+  - full name `Chromium`
   - password `chromium`
   - retype password `chromium`
   - ssh key or URL `none`
@@ -44,13 +44,14 @@ AWK is a web kiosk based on [Alpine Linux](https://www.alpinelinux.org/) (3.23) 
 
 ## configuration
 
-> changes may be necessary (SSH public key, disk `sda`, …) : **be sure to select correct disk if there are multiple available**
+> changes may be necessary (SSH public key, disk `sda`, …)<br/>
+> **be sure to select correct disk if there are multiple available**
 
 - boot AWK from media storage selected during installation
 - login as `root` with defined password
 - modify EFI System Partition (ESP)
 > installation is assumed to have been performed under EFI/UEFI<br/>
-> if this is not case, only run `dosfslabel …` command
+> if this is not case, only run last command `dosfslabel …`
 ```sh
 apk add gptfdisk
 gdisk /dev/sda <<~~~
@@ -69,10 +70,10 @@ ROOT
 w
 y
 ~~~
-dosfslabel /dev/sda1 AWK &> /dev/null
 apk add mtools
 echo 'drive e: file="/dev/sda1"' > /etc/mtools.conf
 mattrib +h +s e:/efi 2> /dev/null
+dosfslabel /dev/sda1 AWK &> /dev/null
 ```
 - make few minor changes
 ```sh
@@ -83,8 +84,10 @@ sed -i -r \
   -e 's/iocharset=utf8/iocharset=iso8859-1,utf8/' \
   /etc/fstab
 ```
-- add widest hardware support (ALWK on a USB device) `apk add linux-firmware`
-> see https://wiki.alpinelinux.org/wiki/Kernels#Firmware for more informations
+- add widest hardware support (AWK on a USB device)
+```sh
+apk add linux-firmware
+```
 - modify GRUB loader (quiet boot)
 ```sh
 chmod -x /etc/grub.d/*
@@ -121,11 +124,10 @@ service machostname start
 ```
 - configure remote access (remote administration)
 > generate an SSH key pair from administration workstation `ssh-keygen -t ed25519 -C comment -f ./AWK.key`<br/>
-> use content of public key `cat ./AWK.key.pub` or copy public key to `~/.ssh/authorized_keys` at ALWK<br/>
-> use alternative ports (`Port 88`, `Port 389`, `Port 445`, `Port 636`, …) if kiosk is operating in filtered environment
+> use content of public key `cat ./AWK.key.pub` below or copy public key to `~/.ssh/authorized_keys` at AWK
 ```sh
 mkdir ~/.ssh/
-echo "ssh-ed25519 AA … … … Sp comment" > ~/.ssh/authorized_keys
+echo "ssh-ed25519 … … … … … comment" > ~/.ssh/authorized_keys
 ```
 - install graphics server, applications and extensions
 ```sh
@@ -158,7 +160,7 @@ service local start
 - configure system initialization (minimum, silent, and auto-login for `browser` user)
 > **no console access with this `/etc/inittab` configuration**<br/>
 > uncomment `#tty2::respawn:/sbin/getty 38400 tty2` for console access<br/>
-> and/or uncomment `#ttyS0::respawn:/sbin/getty -L 0 ttyS0 vt100` for serial console access (Qemu)<br/>
+> and/or uncomment `#ttyS0::respawn:/sbin/getty -L 0 ttyS0 vt100` for serial console access<br/>
 > and/or access AWK via secure shell
 ```sh
 cat > /etc/inittab <<~~~
