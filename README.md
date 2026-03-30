@@ -176,6 +176,12 @@ clear
 echo "Starting browser ..."
 export LANG=fr
 export LC_COLLATE=C
+rm -f \
+  ~/.Xauthority \
+  ~/.serverauth.* \
+  ~/.cache/chromium \
+  ~/.config/chromium \
+  &> /dev/null
 exec startx &>/dev/null
 ~~~
 ```
@@ -219,7 +225,6 @@ chromium \
   grep -E '^(file|http(s)?)://' "$urls" ||
   echo file:///boot/efi/www/index.html
   )
-rm -rf ~/.config/chromium
 jwm -exit
 </StartupCommand>
 </JWM>
