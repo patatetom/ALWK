@@ -92,7 +92,7 @@ GRUB_TIMEOUT_STYLE=hidden
 GRUB_DISABLE_OS_PROBER=true
 " >> /etc/default/grub
 grub-mkconfig |
-sed -e 's/Loading Linux lts/Loading kiosk/' \
+sed -e 's/Loading Linux lts/; echo "  Loading kiosk"/' \
     -e '/Loading initial ramdisk/d' > /boot/grub/grub.cfg
 ```
 - make dynamic hostname (MAC based / multiple kiosks on same LAN)
@@ -158,7 +158,7 @@ service local start
 ```sh
 cat > /etc/inittab <<~~~
 ::sysinit:clear
-::sysinit:echo Starting kiosk ...
+::sysinit:echo $'\n\n  Starting kiosk ...'
 ::sysinit:/sbin/openrc sysinit   -q > /dev/null
 ::sysinit:/sbin/openrc boot      -q > /dev/null
 ::wait:/sbin/openrc default      -q > /dev/null
@@ -175,7 +175,7 @@ tty1::respawn:/bin/login -f browser
 ```sh
 cat > /home/browser/.profile <<~~~
 clear
-echo "Starting browser ..."
+echo $'\n\n  Starting browser ...'
 export LANG=fr
 export LC_COLLATE=C
 rm -f \
@@ -205,6 +205,7 @@ cat > /home/browser/.jwmrc <<\~~~
 <Key mask="A" key="Tab">nextstacked</Key>
 <Key mask="AS" key="Tab">prevstacked</Key>
 <StartupCommand>
+clear | tee -a /dev/tty1 >> /dev/tty1
 chromium \
   --kiosk \
   --no-first-run \
