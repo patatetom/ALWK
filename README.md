@@ -8,6 +8,7 @@ ALWK is a web kiosk based on [Alpine Linux](https://www.alpinelinux.org/) (3.23)
 ## installation
 
 > changes may be necessary (keyboard `fr`, disk `sda`, …) : **be sure to select correct disk if there are multiple available**<br/>
+> **Secure Boot must be disabled on EFI/UEFI platforms**<br/>
 > prefer installation under EFI/UEFI, especially if it is performed to removable media<br/>
 > see also https://docs.alpinelinux.org/ and https://wiki.alpinelinux.org/wiki/Installation for more informations
 
