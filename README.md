@@ -200,6 +200,8 @@ exec jwm
 cat > /home/browser/.jwmrc <<\~~~
 <?xml version="1.0" encoding="UTF-8"?>
 <JWM>
+<Key mask="A" key="Tab">nextstacked</Key>
+<Key mask="AS" key="Tab">prevstacked</Key>
 <StartupCommand>
 chromium \
   --kiosk \
