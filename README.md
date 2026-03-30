@@ -152,7 +152,7 @@ mkdir -p "${root:=/boot/efi/www}"
 echo '<html style="background-color:#0E5980;color:#FFFFFF">
 <div style="font-size:4em;text-align:center"><br/><br/>
 <svg xmlns="http://www.w3.org/2000/svg" width="256" height="102" fill="none" viewBox="0 0 256 102"><path stroke="#000" stroke-linejoin="round" d="M6.162 95.737 93.195 8.704l87.033 87.033m69.627 0-78.33-78.33-17.407 17.407M67.085 69.627v26.11" style="fill:none;stroke:#fff" stroke-width="17.407"/></svg>
-<br/>AWK</br>Alpine Web Kiosk</div></html>' > "$index"
+<br/><br/>AWK</br>Alpine Web Kiosk</div></html>' > "$index"
 ~~~
 chmod +x /etc/local.d/default.web.page.start
 service local start
