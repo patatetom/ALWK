@@ -1,7 +1,7 @@
 ![Alpine Linux Web Kiosk](logo.webp)
-# Alpine Linux Web Kiosk
+# Alpine Web Kiosk
 
-ALWK is a web kiosk based on [Alpine Linux](https://www.alpinelinux.org/) (3.23) and [Chromium](https://www.chromium.org/Home/) (146.0).
+AWK is a web kiosk based on [Alpine Linux](https://www.alpinelinux.org/) (3.23) and [Chromium](https://www.chromium.org/Home/) (146.0).
 
 
 
@@ -17,7 +17,7 @@ ALWK is a web kiosk based on [Alpine Linux](https://www.alpinelinux.org/) (3.23)
 - start installation with `KERNELOPTS="quiet mitigations=off" ROOTFS=btrfs setup-alpine`
   - keymap `fr`
   - keyboard layout `fr`
-  - hostname `kiosk`
+  - hostname `AWK`
   - initialize interface `eth0`
   - ip address `dhcp`
   - root password `**********`
@@ -46,7 +46,7 @@ ALWK is a web kiosk based on [Alpine Linux](https://www.alpinelinux.org/) (3.23)
 
 > changes may be necessary (SSH public key, disk `sda`, …) : **be sure to select correct disk if there are multiple available**
 
-- boot ALWK from media storage selected during installation
+- boot AWK from media storage selected during installation
 - login as `root` with defined password
 - modify EFI System Partition (ESP)
 > installation is assumed to have been performed under EFI/UEFI<br/>
@@ -59,7 +59,7 @@ t
 0700
 c
 1
-ALWK
+AWK
 c
 2
 SWAP
@@ -69,7 +69,7 @@ ROOT
 w
 y
 ~~~
-dosfslabel /dev/sda1 ALWK &> /dev/null
+dosfslabel /dev/sda1 AWK &> /dev/null
 apk add mtools
 echo 'drive e: file="/dev/sda1"' > /etc/mtools.conf
 mattrib +h +s e:/efi 2> /dev/null
@@ -95,7 +95,7 @@ GRUB_TIMEOUT_STYLE=hidden
 GRUB_DISABLE_OS_PROBER=true
 " >> /etc/default/grub
 grub-mkconfig |
-sed -e 's/Loading Linux lts/; echo "  Loading kiosk"/' \
+sed -e 's/Loading Linux lts/; echo "  Loading AWK"/' \
     -e '/Loading initial ramdisk/d' > /boot/grub/grub.cfg
 ```
 - make dynamic hostname (MAC based / multiple kiosks on same LAN)
@@ -108,7 +108,7 @@ depend()
 }
 start()
 {
-	hostname kiosk-$(
+	hostname AWK-$(
 	  ip link show dev eth0 |
 	  awk '/link\/ether/{print$2}' |
 	  tr -d ':'
@@ -120,8 +120,8 @@ rc-update add machostname boot
 service machostname start
 ```
 - configure remote access (remote administration)
-> generate an SSH key pair from administration workstation `ssh-keygen -t ed25519 -C comment -f ./kiosk.key`<br/>
-> use content of public key `cat ./kiosk.key.pub` or copy public key to `~/.ssh/authorized_keys` at ALWK<br/>
+> generate an SSH key pair from administration workstation `ssh-keygen -t ed25519 -C comment -f ./AWK.key`<br/>
+> use content of public key `cat ./AWK.key.pub` or copy public key to `~/.ssh/authorized_keys` at ALWK<br/>
 > use alternative ports (`Port 88`, `Port 389`, `Port 445`, `Port 636`, …) if kiosk is operating in filtered environment
 ```sh
 mkdir ~/.ssh/
@@ -150,7 +150,7 @@ mkdir -p "${root:=/boot/efi/www}"
 echo '<html style="background-color:#0E5980;color:#FFFFFF">
 <div style="font-size:4em;text-align:center"><br/><br/>
 <svg xmlns="http://www.w3.org/2000/svg" width="256" height="102" fill="none" viewBox="0 0 256 102"><path stroke="#000" stroke-linejoin="round" d="M6.162 95.737 93.195 8.704l87.033 87.033m69.627 0-78.33-78.33-17.407 17.407M67.085 69.627v26.11" style="fill:none;stroke:#fff" stroke-width="17.407"/></svg>
-</br>Alpine Linux Web Kiosk</div></html>' > "$index"
+<br/>AWK</br>Alpine Web Kiosk</div></html>' > "$index"
 ~~~
 chmod +x /etc/local.d/default.web.page.start
 service local start
@@ -159,11 +159,11 @@ service local start
 > **no console access with this `/etc/inittab` configuration**<br/>
 > uncomment `#tty2::respawn:/sbin/getty 38400 tty2` for console access<br/>
 > and/or uncomment `#ttyS0::respawn:/sbin/getty -L 0 ttyS0 vt100` for serial console access (Qemu)<br/>
-> and/or access ALWK via secure shell
+> and/or access AWK via secure shell
 ```sh
 cat > /etc/inittab <<~~~
 ::sysinit:clear
-::sysinit:echo $'\n\n  Starting kiosk ...'
+::sysinit:echo $'\n\n  Starting AWK ...'
 ::sysinit:/sbin/openrc sysinit   -q > /dev/null
 ::sysinit:/sbin/openrc boot      -q > /dev/null
 ::wait:/sbin/openrc default      -q > /dev/null
@@ -262,7 +262,7 @@ cat > /etc/chromium/policies/managed/block_file.json <<~~~
 
 ### `%part1%/urls.txt`
 
-> `/boot/efi/urls.txt` on ALWK
+> `/boot/efi/urls.txt` on AWK
 
 `urls.txt` file, located in root directory of first partition, tells browser which web page(s) to open and can be easily installed and configured
 
@@ -272,12 +272,12 @@ file:///boot/efi/www/index.html
 # DuckDuckGo
 https://duckduckgo.com/
 # ALWK ;-)
-https://github.com/patatetom/ALWK/
+https://github.com/patatetom/AWK/
 ```
 
 ### `%part1%/www/index.html`
 
-> `/boot/efi/www/index.html` on ALWK
+> `/boot/efi/www/index.html` on AWK
 
 `index.html` file, stored in `/www/` folder located in root of first partition, is default web page opened by browser and can be easily updated and expanded
 
