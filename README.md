@@ -270,11 +270,11 @@ cat > /etc/chromium/policies/managed/block_file.json <<~~~
 `urls.txt` file, located in root directory of first partition, tells browser which web page(s) to open and can be easily installed and configured
 
 ```ini
-# keep default updated web page for user informations (kiosk guide)
+# default updated web page for kiosk user guide
 file:///boot/efi/www/index.html
 # DuckDuckGo
 https://duckduckgo.com/
-# ALWK ;-)
+# AWK ;-)
 https://github.com/patatetom/AWK/
 ```
 
