@@ -116,18 +116,11 @@ service machostname start
 ```
 - configure remote access (remote administration)
 > generate an SSH key pair from administration workstation `ssh-keygen -t ed25519 -C comment -f ./kiosk.key`<br/>
-> use content of public key `cat ./kiosk.key.pub` or copy public key to `~/.ssh/authorized_keys` at ALWK
+> use content of public key `cat ./kiosk.key.pub` or copy public key to `~/.ssh/authorized_keys` at ALWK<br/>
+> use alternative ports (`Port 88`, `Port 389`, `Port 445`, `Port 636`, …) if kiosk is operating in filtered environment
 ```sh
 mkdir ~/.ssh/
 echo "ssh-ed25519 AA … … … Sp comment" > ~/.ssh/authorized_keys
-echo "
-Port 22
-Port 88
-Port 389
-Port 445
-Port 636
-" >> /etc/ssh/sshd_config
-service sshd restart
 ```
 - install graphics server
 ```sh
