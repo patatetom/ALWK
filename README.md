@@ -205,7 +205,7 @@ cat > /home/browser/.jwmrc <<\~~~
 <Key mask="A" key="Tab">nextstacked</Key>
 <Key mask="AS" key="Tab">prevstacked</Key>
 <StartupCommand>
-clear | tee -a /dev/tty1 >> /dev/tty1
+clear | tee /dev/tty1 > /dev/tty1
 chromium \
   --kiosk \
   --no-first-run \
