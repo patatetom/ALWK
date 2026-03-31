@@ -5,48 +5,22 @@
    viewBox="0 0 256 132"
    version="1.1"
    id="svg3"
-   sodipodi:docname="AWK.svg"
-   inkscape:version="1.4.2 (ebf0e940d0, 2025-05-08)"
-   inkscape:export-filename="/tmp/toto.svg"
-   inkscape:export-xdpi="299.973"
-   inkscape:export-ydpi="299.973"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg">
-  <sodipodi:namedview
-     id="namedview1"
-     pagecolor="#0e5980"
-     bordercolor="#666666"
-     borderopacity="1.0"
-     inkscape:showpageshadow="2"
-     inkscape:pageopacity="0.0"
-     inkscape:pagecheckerboard="0"
-     inkscape:deskcolor="#d1d1d1"
-     showgrid="false"
-     inkscape:zoom="3.2703689"
-     inkscape:cx="128.1201"
-     inkscape:cy="64.212939"
-     inkscape:window-width="1920"
-     inkscape:window-height="1011"
-     inkscape:window-x="0"
-     inkscape:window-y="0"
-     inkscape:window-maximized="1"
-     inkscape:current-layer="svg3"
-     inkscape:export-bgcolor="#0e5980ff" />
   <defs
      id="defs3" />
-  <rect
-     style="fill:#0e5980;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke fill markers"
+  <path
+     style="fill:#0e5980;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-linecap:round;stroke-linejoin:round;paint-order:fill markers stroke"
      id="rect1"
      width="256"
      height="132"
      x="0"
      y="0"
-     inkscape:label="background" />
+     d="m 16,0 h 224 c 8.864,0 16,7.136 16,16 v 100 c 0,8.864 -7.136,16 -16,16 H 16 C 7.136,132 0,124.864 0,116 V 16 C 0,7.136 7.136,0 16,0 Z"
+     rx="16"
+     ry="16" />
   <g
      id="g3"
-     inkscape:label="alpine"
      transform="translate(-0.90157979,-1.2268307)">
     <path
        stroke="#000000"
@@ -54,28 +28,24 @@
        d="M 9.661555,93.904035 94.832995,10.766579 180.00445,93.904035"
        stroke-width="16.8297"
        id="path2-8"
-       style="fill:none;stroke:#ffffff;stroke-opacity:1"
-       inkscape:label="p3" />
+       style="fill:none;stroke:#ffffff;stroke-opacity:1" />
     <path
        stroke="#000000"
        stroke-linejoin="round"
        d="M 248.14161,93.904035 171.4873,19.080346 154.45302,35.707827"
        stroke-width="16.8297"
        id="path3-6"
-       style="fill:none;stroke:#ffffff;stroke-opacity:1"
-       inkscape:label="p2" />
+       style="fill:none;stroke:#ffffff;stroke-opacity:1" />
     <path
        stroke="#000000"
        stroke-linejoin="round"
        d="M 79.281575,68.962787 V 93.904035"
        stroke-width="16.8297"
        id="path4"
-       style="fill:none;stroke:#ffffff;stroke-opacity:1"
-       inkscape:label="p1" />
+       style="fill:none;stroke:#ffffff;stroke-opacity:1" />
   </g>
   <g
      id="g2"
-     inkscape:label="surfboard"
      transform="translate(0,-1.2268307)">
     <path
        stroke="#000"
@@ -83,22 +53,18 @@
        d="M 62.974572,115.32104 51.074493,127.22111"
        stroke-width="13.8041"
        style="fill:none;stroke:#1b93c0;stroke-opacity:1"
-       id="path2"
-       inkscape:label="P5" />
+       id="path2" />
     <path
        style="fill:none;stroke:#1b93c0;stroke-width:17.0001;stroke-linecap:butt;stroke-linejoin:round;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        d="M 22.684304,114.90879 H 233.3157 Z"
-       id="path3"
-       inkscape:label="p4" />
+       id="path3" />
   </g>
   <text
      xml:space="preserve"
      style="font-size:85.3333px;line-height:1.25;font-family:sans-serif;fill:#00ccff"
      x="17.312544"
      y="103.10416"
-     id="text1"
-     inkscape:label="awk"><tspan
-       sodipodi:role="line"
+     id="text1"><tspan
        id="tspan1"
        x="17.312544"
        y="103.10416"
