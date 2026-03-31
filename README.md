@@ -1,4 +1,4 @@
-![Alpine Linux Web Kiosk](logo.webp)
+![Alpine Linux Web Kiosk](AWK.svg)
 # Alpine Web Kiosk
 
 AWK is a web kiosk based on [Alpine Linux](https://www.alpinelinux.org/) (3.23)
