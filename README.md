@@ -98,7 +98,7 @@ GRUB_TIMEOUT_STYLE=hidden
 GRUB_DISABLE_OS_PROBER=true
 " >> /etc/default/grub
 grub-mkconfig |
-sed -e "s/'Loading Linux lts/; echo '  Loading AWK'/" \
+sed -e "s/'Loading Linux lts/; echo '  Loading AWK/" \
     -e "/Loading initial ramdisk/d" > /boot/grub/grub.cfg
 ```
 - make dynamic hostname (MAC based / multiple kiosks on same LAN)
