@@ -148,7 +148,7 @@ EndSection
 rc-update add local default
 cat > /etc/local.d/default.web.page.start <<\~~~
 mkdir -p "${root:=/boot/efi/www}"
-[ -f "${index:=$root/index.html}" ] ||
+[ -f "${index:=$root/AWK.html}" ] ||
 echo '<html style="background-color:#0E5980;color:#00ccff;font-family:sans;font-style:italic;font-weight:bold">
 <title>AWK</title>
 <div style="font-size:4em;text-align:center">
@@ -248,7 +248,7 @@ chromium \
   $(
   [ -f "${urls:=/boot/efi/urls.txt}" ] &&
   grep -E '^(file|http(s)?)://' "$urls" ||
-  echo file:///boot/efi/www/index.html
+  echo file:///boot/efi/www/AWK.html
   )
 jwm -exit
 </StartupCommand>
@@ -283,18 +283,18 @@ cat > /etc/chromium/policies/managed/block_file.json <<~~~
 
 ```ini
 # default updated web page for kiosk user guide
-file:///boot/efi/www/index.html
+file:///boot/efi/www/AWK.html
 # DuckDuckGo
 https://duckduckgo.com/
 # AWK ;-)
 https://github.com/patatetom/AWK/
 ```
 
-### `%part1%/www/index.html`
+### `%part1%/www/AWK.html`
 
-> `/boot/efi/www/index.html` on AWK
+> `/boot/efi/www/AWK.html` on AWK
 
-`index.html` file, stored in `/www/` folder located in root of first partition, is default web page opened by browser and can be easily updated and expanded
+`AWK.html` file, stored in `/www/` folder located in root of first partition, is default web page opened by browser and can be easily updated and expanded
 
 
 
