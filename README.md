@@ -149,10 +149,15 @@ rc-update add local default
 cat > /etc/local.d/default.web.page.start <<\~~~
 mkdir -p "${root:=/boot/efi/www}"
 [ -f "${index:=$root/index.html}" ] ||
-echo '<html style="background-color:#0E5980;color:#FFFFFF">
+echo '<html style="background-color:#0E5980;color:#00FFFF;font-family:sans;font-style:italic;font-weight:bold">
 <title>AWK</title>
 <div style="font-size:4em;text-align:center"><br/><br/>
-<svg xmlns="http://www.w3.org/2000/svg" width="256" height="102" fill="none" viewBox="0 0 256 102"><path stroke="#000" stroke-linejoin="round" d="M6.162 95.737 93.195 8.704l87.033 87.033m69.627 0-78.33-78.33-17.407 17.407M67.085 69.627v26.11" style="fill:none;stroke:#fff" stroke-width="17.407"/></svg>
+<svg width="256" height="132" viewBox="0 0 256 132" xmlns="http://www.w3.org/2000/svg">
+<path d="m9.662 93.904 85.171-83.137 85.171 83.137m68.138 0L171.487 19.08l-17.034 16.628M79.282 68.963v24.941" style="fill:none;stroke:#fff;stroke-opacity:1" transform="translate(-.902 -1.227)" stroke="#000" stroke-linejoin="round" stroke-width="16.83"/>
+<path stroke="#000" stroke-linejoin="round" d="m62.975 115.321-11.9 11.9" stroke-width="13.804" style="fill:none;stroke:#1b93c0;stroke-opacity:1" transform="translate(0 -1.227)"/>
+<path style="fill:none;stroke:#1b93c0;stroke-width:17.0001;stroke-linecap:butt;stroke-linejoin:round;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" d="M22.684 114.909h210.632Z" transform="translate(0 -1.227)"/>
+<text xml:space="preserve" style="font-size:85.3333px;line-height:1.25;font-family:sans-serif;fill:#0ff" x="17.313" y="101.104"><tspan x="17.313" y="101.104" style="font-style:oblique;font-variant:normal;font-weight:700;font-stretch:normal;font-size:85.3333px;font-family:&quot;DejaVu Sans&quot;;-inkscape-font-specification:&quot;DejaVu Sans Bold Oblique&quot;;fill:#0ff;fill-opacity:1">AWK</tspan></text>
+</svg>
 </br>Alpine Web Kiosk</div></html>' > "$index"
 ~~~
 chmod +x /etc/local.d/default.web.page.start
