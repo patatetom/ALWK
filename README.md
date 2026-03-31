@@ -149,7 +149,7 @@ rc-update add local default
 cat > /etc/local.d/default.web.page.start <<\~~~
 mkdir -p "${root:=/boot/efi/www}"
 [ -f "${index:=$root/index.html}" ] ||
-echo '<html style="background-color:#0E5980;color:#00FFFF;font-family:sans;font-style:italic;font-weight:bold">
+echo '<html style="background-color:#0E5980;color:#00ccff;font-family:sans;font-style:italic;font-weight:bold">
 <title>AWK</title>
 <div style="font-size:4em;text-align:center">
 <br/><br/>
@@ -157,10 +157,9 @@ echo '<html style="background-color:#0E5980;color:#00FFFF;font-family:sans;font-
 <path fill="none" stroke="#fff" stroke-linejoin="round" stroke-width="16.83" d="M8.76 92.677 93.931 9.54l85.171 83.137m68.138 0-76.655-74.824-17.034 16.628M78.38 67.736v24.941"/>
 <path fill="none" stroke="#1b93c0" stroke-linejoin="round" stroke-width="13.804" d="m62.975 114.094-11.9 11.9"/>
 <path fill="none" stroke="#1b93c0" stroke-linejoin="round" stroke-width="17" d="M22.684 113.682h210.632Z"/>
-<text xml:space="preserve" x="17.313" y="101.104" fill="#0ff" font-family="sans-serif" font-size="85.333" style="line-height:1.25"><tspan x="17.313" y="101.104" font-family="DejaVu Sans" font-style="oblique" font-weight="700" style="-inkscape-font-specification:&quot;DejaVu Sans Bold Oblique&quot;">AWK</tspan></text>
+<text xml:space="preserve" x="17.313" y="102.104" fill="#00ccff" font-family="sans-serif" font-size="85.333" style="line-height:1.25"><tspan x="17.313" y="102.104" font-family="DejaVu Sans" font-style="oblique" font-weight="700" style="-inkscape-font-specification:&quot;DejaVu Sans Bold Oblique&quot;">AWK</tspan></text>
 </svg>
-</br>
-Alpine Web Kiosk
+</br>Alpine Web Kiosk
 </div>
 </html>' > "$index"
 ~~~
