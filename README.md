@@ -98,8 +98,8 @@ GRUB_TIMEOUT_STYLE=hidden
 GRUB_DISABLE_OS_PROBER=true
 " >> /etc/default/grub
 grub-mkconfig |
-sed -e 's/Loading Linux lts/; echo "  Loading AWK"/' \
-    -e '/Loading initial ramdisk/d' > /boot/grub/grub.cfg
+sed -e "s/'Loading Linux lts/; echo '  Loading AWK'/" \
+    -e "/Loading initial ramdisk/d" > /boot/grub/grub.cfg
 ```
 - make dynamic hostname (MAC based / multiple kiosks on same LAN)
 ```sh
@@ -162,13 +162,15 @@ service local start
 > **no console access with this `/etc/inittab` configuration**<br/>
 > uncomment `#tty2::respawn:/sbin/getty 38400 tty2` for console access<br/>
 > and/or uncomment `#ttyS0::respawn:/sbin/getty -L 0 ttyS0 vt100` for serial console access<br/>
-> and/or access AWK via secure shell
+> and/or access AWK via secure shell<br/>
+> sleep may be added to make it easier to read assigned network address
 ```sh
 cat > /etc/inittab <<~~~
 ::sysinit:clear
-::sysinit:echo $'\n\n  Starting AWK ...'
+::sysinit:echo $'\n\n  Starting AWK ...\n\n'
 ::sysinit:/sbin/openrc sysinit   -q > /dev/null
 ::sysinit:/sbin/openrc boot      -q > /dev/null
+#::sysinit:sleep 3s
 ::wait:/sbin/openrc default      -q > /dev/null
 tty1::respawn:/bin/login -f browser
 #tty2::respawn:/sbin/getty 38400 tty2
@@ -186,7 +188,7 @@ clear
 echo $'\n\n  Starting browser ...'
 export LANG=fr
 export LC_COLLATE=C
-rm -f \
+rm -rf \
   ~/.Xauthority \
   ~/.serverauth.* \
   ~/.cache/chromium \
@@ -213,7 +215,8 @@ cat > /home/browser/.jwmrc <<\~~~
 <Key mask="A" key="Tab">nextstacked</Key>
 <Key mask="AS" key="Tab">prevstacked</Key>
 <StartupCommand>
-yes '' | head -100 > /dev/tty1
+yes '' | head -256 > /dev/tty1
+clear > /dev/tty1
 chromium \
   --start-maximized \
   --no-first-run \
