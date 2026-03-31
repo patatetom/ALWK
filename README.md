@@ -300,4 +300,4 @@ https://github.com/patatetom/AWK/
 
 ## screencast
 
-[![boot screencast](boot.webp)](boot.large.webp)
+[![AWK in action](AWK.webp)](AWK.large.webp)
