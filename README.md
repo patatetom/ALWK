@@ -153,11 +153,12 @@ echo '<html style="background-color:#0E5980;color:#00ccff;font-family:sans;font-
 <title>AWK</title>
 <div style="font-size:4em;text-align:center">
 <br/><br/>
-<svg xmlns="http://www.w3.org/2000/svg" width="256" height="132" style="background-color:#0e5980">
-<path fill="none" stroke="#fff" stroke-linejoin="round" stroke-width="16.83" d="M8.76 92.677 93.931 9.54l85.171 83.137m68.138 0-76.655-74.824-17.034 16.628M78.38 67.736v24.941"/>
-<path fill="none" stroke="#1b93c0" stroke-linejoin="round" stroke-width="13.804" d="m62.975 114.094-11.9 11.9"/>
-<path fill="none" stroke="#1b93c0" stroke-linejoin="round" stroke-width="17" d="M22.684 113.682h210.632Z"/>
-<text xml:space="preserve" x="17.313" y="102.104" fill="#00ccff" font-family="sans-serif" font-size="85.333" style="line-height:1.25"><tspan x="17.313" y="102.104" font-family="DejaVu Sans" font-style="oblique" font-weight="700" style="-inkscape-font-specification:&quot;DejaVu Sans Bold Oblique&quot;">AWK</tspan></text>
+<svg width="256" height="132" xmlns="http://www.w3.org/2000/svg">
+<path style="fill:#0e5980;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-linecap:round;stroke-linejoin:round;paint-order:fill markers stroke" d="M16 0h224c8.864 0 16 7.136 16 16v100c0 8.864-7.136 16-16 16H16c-8.864 0-16-7.136-16-16V16C0 7.136 7.136 0 16 0Z"/>
+<g stroke="#000" stroke-linejoin="round" stroke-width="16.83"><path d="m9.662 93.904 85.171-83.137 85.171 83.137M248.142 93.904 171.487 19.08l-17.034 16.628M79.282 68.963v24.941" style="fill:none;stroke:#fff;stroke-opacity:1" transform="translate(-.902 -1.227)"/></g>
+<path stroke="#000" stroke-linejoin="round" d="m62.975 115.321-11.9 11.9" stroke-width="13.804" style="fill:none;stroke:#1b93c0;stroke-opacity:1" transform="translate(0 -1.227)"/>
+<path style="fill:none;stroke:#1b93c0;stroke-width:17.0001;stroke-linecap:butt;stroke-linejoin:round;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" d="M22.684 114.909h210.632Z" transform="translate(0 -1.227)"/>
+<text xml:space="preserve" style="font-size:85.3333px;line-height:1.25;font-family:sans-serif;fill:#0cf" x="17.313" y="103.104"><tspan x="17.313" y="103.104" style="font-style:oblique;font-variant:normal;font-weight:700;font-stretch:normal;font-size:85.3333px;font-family:'DejaVu Sans';-inkscape-font-specification:'DejaVu Sans Bold Oblique';fill:#0cf;fill-opacity:1">AWK</tspan></text>
 </svg>
 </br>Alpine Web Kiosk
 </div>
