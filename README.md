@@ -198,7 +198,7 @@ echo $'\n\n  Starting browser ...'
 export LANG=fr
 export LC_COLLATE=C
 rm -rf \
-  ~/.Xauthority \
+  ~/.Xauthority* \
   ~/.serverauth.* \
   ~/.cache/chromium \
   ~/.config/chromium \
@@ -251,7 +251,6 @@ chromium \
   echo file:///boot/efi/www/AWK.html
   )
 rm -rf \
-  ~/.Xauthority \
   ~/.serverauth.* \
   ~/.cache/chromium \
   ~/.config/chromium
