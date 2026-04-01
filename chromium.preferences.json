@@ -1,0 +1,75 @@
+{
+  "auto_pin_new_tab_groups": false,
+  "autofill": {
+    "credit_card_enabled": false,
+    "payment_card_benefits": false,
+    "payment_cvc_storage": false
+  },
+  "bookmark_bar": {
+    "show_tab_groups": false
+  },
+  "browser": {
+    "enable_spellchecking": true,
+    "show_home_button": true,
+    "split_view_drag_and_drop_enabled": false
+  },
+  "credentials_enable_automatic_passkey_upgrades": false,
+  "credentials_enable_autosignin": true,
+  "download": {
+    "default_directory": "/tmp",
+    "directory_upgrade": true
+  },
+  "download_bubble": {
+    "partial_view_enabled": false
+  },
+  "enable_do_not_track": true,
+  "homepage": "file:///boot/efi/www/AWK.html",
+  "homepage_is_newtabpage": false,
+  "intl": {
+    "accept_languages": "fr",
+    "selected_languages": "fr"
+  },
+  "net": {
+    "network_prediction_options": 0
+  },
+  "payments": {
+    "can_make_payment_enabled": false
+  },
+  "profile": {
+    "avatar_index": 34,
+    "name": "browser",
+    "using_default_avatar": false,
+    "using_default_name": false,
+    "using_gaia_avatar": false
+  },
+  "savefile": {
+    "default_directory": "/tmp"
+  },
+  "search": {
+    "suggest_enabled": false
+  },
+  "session": {
+    "restore_on_startup": 4,
+    "startup_urls": [
+      "file:///boot/efi/www/AWK.html"
+    ]
+  },
+  "settings": {
+    "force_google_safesearch": false
+  },
+  "signin": {
+    "accounts_metadata_dict": {},
+    "allowed": false,
+    "allowed_on_next_startup": false
+  },
+  "spellcheck": {
+    "dictionaries": [
+      "fr"
+    ],
+    "dictionary": "",
+    "use_spelling_service": false
+  },
+  "translate": {
+    "enabled": false
+  }
+}
