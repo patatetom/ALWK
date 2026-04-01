@@ -250,6 +250,11 @@ chromium \
   grep -E '^(file|http(s)?)://' "$urls" ||
   echo file:///boot/efi/www/AWK.html
   )
+rm -rf \
+  ~/.Xauthority \
+  ~/.serverauth.* \
+  ~/.cache/chromium \
+  ~/.config/chromium
 jwm -exit
 </StartupCommand>
 </JWM>
