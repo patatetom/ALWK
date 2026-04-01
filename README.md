@@ -191,6 +191,7 @@ tty1::respawn:/bin/login -f browser
 ~~~
 ```
 - configure login for `browser` user (graphics server automatic startup at login)
+> `~/.chromium.tgz` is a pre-configuration for Chromium (view file in repository)
 ```sh
 cat > /home/browser/.profile <<~~~
 clear
@@ -203,7 +204,8 @@ rm -rf \
   ~/.cache/chromium \
   ~/.config/chromium \
   &> /dev/null
-exec startx &>/dev/null
+tar -C ~ -xf ~/.chromium.tgz &> /dev/null
+exec startx &> /dev/null
 ~~~
 ```
 - configure window manager's startup
