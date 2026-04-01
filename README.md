@@ -276,6 +276,13 @@ cat > /etc/chromium/policies/managed/block_file.json <<~~~
 }
 ~~~
 ```
+- install provided pre-configuration (optional)
+```
+wget -O /home/browser/.chromium.tgz \
+https://github.com/patatetom/AWK/raw/refs/heads/main/chromium.config.tgz
+# check tgz file
+# tar tvzf /home/browser/.chromium.tgz
+```
 
 
 
