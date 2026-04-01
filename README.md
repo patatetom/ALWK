@@ -266,13 +266,15 @@ jwm -exit
 
 ## Chromium configuration
 
-- disable `file://` scheme (except for default web page)
+- disable `file://` scheme (except for default web page) et fix download directory
 ```sh
 mkdir -p /etc/chromium/policies/managed/
-cat > /etc/chromium/policies/managed/block_file.json <<~~~
+cat > /etc/chromium/policies/managed/AWK.json <<~~~
 {
   "URLAllowlist": ["file:///boot/efi/www/"],
-  "URLBlocklist": ["file://"]
+  "URLBlocklist": ["file://"],
+  "DownloadRestrictions": 3,
+  "DownloadDirectory": "/tmp/"
 }
 ~~~
 ```
