@@ -298,6 +298,15 @@ https://github.com/patatetom/AWK/
 
 
 
+## notes
+
+- AWK is « French-oriented »
+- BTRFS file system is preferred over EXT4 when installing on removable USB media (portable kiosk)
+- audio and printing are not currently supported
+- press `ESC` at boot to access GRUB bootloader and add/change kernel parameters (press `E`)
+
+
+
 ## screencast
 
 [![AWK in action](AWK.webp)](AWK.large.webp)
