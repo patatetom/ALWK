@@ -1,6 +1,10 @@
 # Zeroconf
 
 ```sh
+# add edge/testing to repositories (avahi2dns)
+echo "@testing http://mirrors.ircam.fr/pub/alpine/edge/testing" >> /etc/apk/repositories
+apk update
+
 # add mdns tools
 apk add avahi avahi-tools avahi2dns
 
