@@ -23,7 +23,7 @@
     "partial_view_enabled": false
   },
   "enable_do_not_track": true,
-  "homepage": "file:///boot/efi/www/AWK.html",
+  "homepage": "file:///www/AWK.html",
   "homepage_is_newtabpage": false,
   "intl": {
     "accept_languages": "fr",
@@ -51,7 +51,7 @@
   "session": {
     "restore_on_startup": 4,
     "startup_urls": [
-      "file:///boot/efi/www/AWK.html"
+      "file:///www/AWK.html"
     ]
   },
   "settings": {
