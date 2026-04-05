@@ -322,7 +322,8 @@ https://github.com/patatetom/AWK/
 - ESP partition is redesigned when installing on removable USB media (Windows with portable kiosk)
 - BTRFS file system is preferred over EXT4 when installing on removable USB media (portable kiosk)
 - audio and printing are not currently supported
-- press `ESC` at boot to access GRUB bootloader and add/change kernel parameters (press `E`)
+- press `ESC` at boot to access GRUB bootloader and press `E` to edit/add/change kernel parameters
+- transferring AWK from one media storage to another usually requires fixing GPT: use `gdisk` to fix it (some EFI/UEFI systems refuse to boot if GPT is invalid)
 
 
 
