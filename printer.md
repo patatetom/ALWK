@@ -3,7 +3,7 @@
 > 
 
 ```sh
-# add edge/community to repositories
+# add edge/community to repositories (hplip)
 echo "@edge http://mirrors.ircam.fr/pub/alpine/edge/community" >> /etc/apk/repositories
 apk update
 
