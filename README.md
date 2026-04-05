@@ -3,6 +3,9 @@
 
 AWK is a web kiosk based on [Alpine Linux](https://www.alpinelinux.org/) (3.23)
 
+_with this repo, you can (quickly and easily) set up a web kiosk based on Alpine Linux and Chromium web browser :_
+_«&nbsp;a web kiosk is a self-service computer terminal accessible to the public that allows users to view informations or perform actions via web interfaces in a limited and controlled manner&nbsp;»_
+
 
 
 ## installation
