@@ -151,6 +151,7 @@ EndSection
 rc-update add local default
 cat > /etc/local.d/default.web.page.start <<\~~~
 mkdir -p "${root:=/boot/efi/www}"
+ln -sf "$root" /
 [ -f "${index:=$root/AWK.html}" ] ||
 echo '<html style="background-color:#0E5980;color:#00ccff;font-family:sans;font-style:italic;font-weight:bold">
 <title>AWK</title>
@@ -253,7 +254,7 @@ chromium \
   $(
   [ -f "${urls:=/boot/efi/urls.txt}" ] &&
   grep -E '^(file|http(s)?)://' "$urls" ||
-  echo file:///boot/efi/www/AWK.html
+  echo file:///www/AWK.html
   )
 rm -rf \
   ~/.serverauth.* \
@@ -274,7 +275,7 @@ jwm -exit
 mkdir -p /etc/chromium/policies/managed/
 cat > /etc/chromium/policies/managed/AWK.json <<~~~
 {
-  "URLAllowlist": ["file:///boot/efi/www/"],
+  "URLAllowlist": ["file:///www/"],
   "URLBlocklist": ["file://"],
   "DownloadRestrictions": 3,
   "DownloadDirectory": "/tmp/"
