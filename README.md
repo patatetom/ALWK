@@ -66,9 +66,8 @@ listen-address=127.0.0.1,::1
 cache-size=2048
 ~~~
 cat > /etc/resolv.conf <<~~~
-nameserver ::1
 nameserver 127.0.0.1
-options trust-ad
+nameserver ::1
 ~~~
 chattr +i /etc/resolv.conf
 rc-service dnsmasq start
