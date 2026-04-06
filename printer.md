@@ -1,6 +1,6 @@
 # Cups
 
-> 
+> see [mdns.md](mdns.md) to use Zeroconf with Avahi
 
 ```sh
 # add edge/community to repositories (hplip)
@@ -24,8 +24,15 @@ apk add hplip
 #    masked in: @edge
 #    satisfies: world[hplip]
 
+# install cups and filters
 apk add cups cups-filters
+
+# add cups to default runlevel
 rc-update add cupsd
+
+# start cups immediatly
 rc-service cupsd start
+
+# let root manage cups
 sed -i 's/^lpadmin:x:105:$/lpadmin:x:105:root/' /etc/group
 ```
