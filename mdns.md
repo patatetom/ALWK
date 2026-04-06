@@ -28,6 +28,14 @@ cat >> /etc/dnsmasq.conf <<~~~
 server=/local/127.0.0.1#5354
 ~~~
 
+# add search directive (expand hosts / optional)
+#chattr -i /etc/resolv.conf
+#cat >> /etc/resolv.conf <<~~~
+#options ndots:1
+#search local
+#~~~
+#chattr +i /etc/resolv.conf
+
 # restart dnsmasq
 rc-service dnsmasq restart
 
