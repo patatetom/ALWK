@@ -52,6 +52,29 @@ _«&nbsp;a web kiosk is a self-service computer terminal accessible to the publi
 
 - boot AWK from media storage selected during installation
 - login as `root` with defined password
+- change domain name resolution
+```sh
+apk add dnsmasq
+rc-update add dnsmasq
+cat > /etc/dnsmasq.conf <<~~~
+resolv-file=/etc/resolv.dnsmasq
+domain-needed
+bogus-priv
+interface=lo
+no-dhcp-interface=
+listen-address=127.0.0.1,::1
+cache-size=2048
+~~~
+cat > /etc/resolv.conf <<~~~
+nameserver ::1
+nameserver 127.0.0.1
+options trust-ad
+~~~
+chattr +i /etc/resolv.conf
+rc-service dnsmasq start
+echo 'RESOLV_CONF="/etc/resolv.dnsmasq"' > /etc/udhcpc/udhcpc.conf
+service networking restart
+```
 - modify EFI System Partition (ESP)
 > installation is assumed to have been performed under EFI/UEFI<br/>
 > if this is not case, only run last command `dosfslabel …`
