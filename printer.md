@@ -8,7 +8,7 @@ echo "@edge http://mirrors.ircam.fr/pub/alpine/edge/community" >> /etc/apk/repos
 apk update
 
 # hplip actually return error
-apk add hplip
+apk add hplip@edge
 #ERROR: unable to select packages:
 #  hplip-libs-3.25.8-r2:
 #    masked in: @edge
