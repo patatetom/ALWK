@@ -28,6 +28,14 @@ cat > /home/browser/.xbindkeysrc <<~~~
     Mod4 + s
 "pavucontrol"
     Mod4 + v
+"pactl set-sink-volume @DEFAULT_SINK@ +1000"
+   XF86AudioRaiseVolume
+"pactl set-sink-volume @DEFAULT_SINK@ -1000"
+   XF86AudioLowerVolume
+"pactl set-sink-mute @DEFAULT_SINK@ toggle"
+   XF86AudioMute
+"pactl set-source-mute @DEFAULT_SOURCE@ toggle"
+   XF86AudioMicMute
 ~~~
 
 reboot
