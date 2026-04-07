@@ -43,4 +43,5 @@ rc-service dnsmasq restart
 #apk add drill
 #drill www.google.fr
 #drill printer.local
+##drill print # if search directive added to /etc/resolv.conf
 ```
