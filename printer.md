@@ -2,7 +2,7 @@
 
 printing support can be added to AWK using the following commands
 
-> see [mdns.md](mdns.md) to use Zeroconf with Avahi
+> see [mdns.md](mdns.md) to add/use Zeroconf with Avahi
 
 ```sh
 # add edge/community to repositories (hplip)
@@ -37,6 +37,10 @@ rc-service cupsd start
 
 # let root manage cups
 sed -i 's/^lpadmin:x:105:$/lpadmin:x:105:root/' /etc/group
+
+# let root redirect local port
+sed -i -E 's/^(AllowTcpForwarding) no$/\1 yes\npermitopen="127.0.0.1:*"/' /etc/ssh/sshd_config
+rc-service sshd restart
 ```
 
-> adding a printer and configuring it can then be done directly from AWK (`http://localhost:631/`) or remotely via SSH (`ssh -NC -i …/AWK.key -L 1631:localhost:631 root@AWK-%macaddr%` then `http://localhost:1631/`)
+> adding a printer and configuring it can then be done directly from AWK (`http://localhost:631/`) or remotely via SSH and browser (`ssh -NC -i …/AWK.key -L 1631:localhost:631 root@AWK-%macaddr%` then `http://localhost:1631/`)
