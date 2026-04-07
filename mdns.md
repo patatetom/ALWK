@@ -6,7 +6,7 @@ echo "@testing http://mirrors.ircam.fr/pub/alpine/edge/testing" >> /etc/apk/repo
 apk update
 
 # add mDNS tools
-apk add avahi avahi-tools avahi2dns
+apk add avahi avahi-tools avahi2dns@testing
 
 # add mDNS tools to default runlevel
 rc-update add avahi-daemon
