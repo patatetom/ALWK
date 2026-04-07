@@ -63,6 +63,7 @@ bogus-priv
 interface=lo
 no-dhcp-interface=
 listen-address=127.0.0.1,::1
+bind-interfaces
 cache-size=2048
 ~~~
 cat > /etc/resolv.conf <<~~~
