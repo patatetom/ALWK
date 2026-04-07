@@ -1,5 +1,7 @@
 # Cups
 
+printing support can be added to AWK using the following commands
+
 > see [mdns.md](mdns.md) to use Zeroconf with Avahi
 
 ```sh
@@ -36,3 +38,5 @@ rc-service cupsd start
 # let root manage cups
 sed -i 's/^lpadmin:x:105:$/lpadmin:x:105:root/' /etc/group
 ```
+
+> adding a printer and configuring it can then be done directly from AWK (`http://localhost:631/`) or remotely via SSH (`ssh -NC -i …/AWK.key -L 1631:localhost:631 root@AWK-%macaddr%` then `http://localhost:1631/`)
