@@ -324,7 +324,7 @@ https://github.com/patatetom/AWK/raw/refs/heads/main/chromium.config.tgz
 
 ```ini
 # default updated web page for kiosk user guide
-file:///boot/efi/www/AWK.html
+file:///www/AWK.html
 # DuckDuckGo
 https://duckduckgo.com/
 # AWK ;-)
@@ -333,7 +333,7 @@ https://github.com/patatetom/AWK/
 
 ### `%part1%/www/AWK.html`
 
-> `/boot/efi/www/AWK.html` on AWK
+> `/boot/efi/www/AWK.html` or `/www/AWK.html` (symlink) on AWK
 
 `AWK.html` file, stored in `/www/` folder located in root of first partition, is default web page opened by browser and can be easily updated and expanded
 
