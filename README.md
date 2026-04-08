@@ -127,6 +127,7 @@ grub-mkconfig |
 sed -e "s/'Loading Linux lts/; echo '  Loading AWK/" \
     -e "/Loading initial ramdisk/d" > /boot/grub/grub.cfg
 ```
+> after kernel/system upgrade, you should replay last command `grub-mkconfig | sed …`
 - make dynamic hostname (MAC based / multiple kiosks on same LAN)
 ```sh
 cat > /etc/init.d/machostname <<\~~~
