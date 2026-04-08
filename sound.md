@@ -23,19 +23,27 @@ load-module module-switch-on-connect
 # add output/volume control and bind [Window]-[S] (sound)
 # or [Window]-[V] (volume) to pavucontrol
 apk add pavucontrol xbindkeys
+mkdir -p /home/browser/.config
+cat > /home/browser/.config/pavucontrol.ini <<~~~
+[window]
+width=688
+height=442
+showVolumeMeters=1
+hideUnavailableCardProfiles=1
+~~~
 cat > /home/browser/.xbindkeysrc <<~~~
 "killall pavucontrol; pavucontrol"
-    Mod4 + s
+  Mod4 + s
 "killall pavucontrol; pavucontrol"
-    Mod4 + v
+  Mod4 + v
 "pactl set-sink-volume @DEFAULT_SINK@ +1000"
-   XF86AudioRaiseVolume
+  XF86AudioRaiseVolume
 "pactl set-sink-volume @DEFAULT_SINK@ -1000"
-   XF86AudioLowerVolume
+  XF86AudioLowerVolume
 "pactl set-sink-mute @DEFAULT_SINK@ toggle"
-   XF86AudioMute
+  XF86AudioMute
 "pactl set-source-mute @DEFAULT_SOURCE@ toggle"
-   XF86AudioMicMute
+  XF86AudioMicMute
 ~~~
 
 reboot
