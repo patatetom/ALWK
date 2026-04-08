@@ -24,9 +24,9 @@ load-module module-switch-on-connect
 # or [Window]-[V] (volume) to pavucontrol
 apk add pavucontrol xbindkeys
 cat > /home/browser/.xbindkeysrc <<~~~
-"pavucontrol"
+"killall pavucontrol; pavucontrol"
     Mod4 + s
-"pavucontrol"
+"killall pavucontrol; pavucontrol"
     Mod4 + v
 "pactl set-sink-volume @DEFAULT_SINK@ +1000"
    XF86AudioRaiseVolume
