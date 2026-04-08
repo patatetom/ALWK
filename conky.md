@@ -61,3 +61,5 @@ conky.config = {
 grep -q conky /home/browser/.xinitrc ||
   sed -i '1i conky' /home/browser/.xinitrc
 ```
+
+![Conky system informations on desktop](conky.webp)
