@@ -346,9 +346,9 @@ https://github.com/patatetom/AWK/
 - AWK is « French-oriented »
 - ESP partition is redesigned when installing on removable USB media (Windows with portable kiosk)
 - BTRFS file system is preferred over EXT4 when installing on removable USB media (portable kiosk)
-- audio and printing are not currently supported
+- [audio](audio.md) and [printing](printing.md) are not natively supported
 - press `ESC` at boot to access GRUB bootloader and press `E` to edit/add/change kernel parameters
-- transferring AWK from one media storage to another usually requires fixing GPT : use `gdisk` to fix it (some EFI/UEFI systems refuse to boot if GPT is invalid)
+- transferring AWK from one media storage to another usually requires fixing GPT : use `gdisk` to fix it (some EFI/UEFI platforms refuse to boot if GPT is invalid)
 
 
 
