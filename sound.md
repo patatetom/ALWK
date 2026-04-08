@@ -48,3 +48,5 @@ cat > /home/browser/.xbindkeysrc <<~~~
 
 reboot
 ```
+
+![PulseAudio volume control](pavucontrol.webp)
