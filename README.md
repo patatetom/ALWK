@@ -142,11 +142,7 @@ depend()
 }
 start()
 {
-	hostname AWK-$(
-	  ip link show dev eth0 |
-	  awk '/link\/ether/{print$2}' |
-	  tr -d ':'
-	)
+	hostname AWK-$( tr -d ':' < /sys/class/net/eth0/address )
 }
 ~~~
 chmod +x /etc/init.d/machostname
