@@ -32,18 +32,26 @@ showVolumeMeters=1
 hideUnavailableCardProfiles=1
 ~~~
 cat > /home/browser/.xbindkeysrc <<~~~
-"killall pavucontrol; pavucontrol"
-  Mod4 + s
-"killall pavucontrol; pavucontrol"
-  Mod4 + v
+"killall pavucontrol; pavucontrol &"
+  Mod4 + S
+"killall pavucontrol; pavucontrol &"
+  Mod4 + V
 "pactl set-sink-volume @DEFAULT_SINK@ +1000"
   XF86AudioRaiseVolume
+"pactl set-sink-volume @DEFAULT_SINK@ +1000"
+  Mod4 + 2
 "pactl set-sink-volume @DEFAULT_SINK@ -1000"
   XF86AudioLowerVolume
+"pactl set-sink-volume @DEFAULT_SINK@ -1000"
+  Mod4 + 3
 "pactl set-sink-mute @DEFAULT_SINK@ toggle"
   XF86AudioMute
+"pactl set-sink-mute @DEFAULT_SINK@ toggle"
+  Mod4 + 1
 "pactl set-source-mute @DEFAULT_SOURCE@ toggle"
   XF86AudioMicMute
+"pactl set-source-mute @DEFAULT_SOURCE@ toggle"
+  Mod4 + 4
 ~~~
 
 reboot
