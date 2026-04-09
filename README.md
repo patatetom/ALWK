@@ -77,7 +77,8 @@ service networking restart
 ```
 - modify EFI System Partition (ESP)
 > installation is assumed to have been performed under EFI/UEFI<br/>
-> if this is not case, only run last command `dosfslabel …`
+> if this is not case, only run last command `dosfslabel …`<br/>
+> `c\n1\nAWK\nc\n2\nSWAP\nc\n3\nROOT\n` part is optional
 ```sh
 apk add gptfdisk
 gdisk /dev/sda <<~~~
