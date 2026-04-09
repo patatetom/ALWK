@@ -14,11 +14,11 @@ apk add sof-firmware
 # add pulseaudio, set default volume to 100% on all output
 # and switch on new device
 apk add pulseaudio pulseaudio-utils
-cat >> /etc/pulse/default.pa <<~~~
-########################################
+grep -q 'volume @DEFAULT_SINK@ 0x10000' /etc/pulse/default.pa ||
+echo '
 set-sink-volume @DEFAULT_SINK@ 0x10000
 load-module module-switch-on-connect
-~~~
+' >> /etc/pulse/default.pa
 
 # add output/volume control and bind [Window]-[S] (sound)
 # or [Window]-[V] (volume) to pavucontrol
