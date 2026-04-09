@@ -181,6 +181,7 @@ Section "InputClass"
   MatchDriver "libinput"
   MatchIsTouchpad "on"
   Option "Tapping" "on"
+  Option "NaturalScrolling" "on"
 EndSection
 ~~~
 ```
