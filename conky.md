@@ -15,7 +15,7 @@ ${color grey}RAM   :$color $memperc%${goto 128}${membar 12}
 ${color grey}SWAP  :$color $swapperc%${goto 128}${swapbar 12}
 ${color grey}CPU   :$color $cpu%${goto 128}${cpubar 12}
 ${color grey}DISK  :$color $fs_used_perc%${goto 128}${fs_bar 12 /}
-${color grey}IP    :$color ${addr eth0}
+${color grey}IP    :$color ${if_up eth0}${addr eth0}${else}${if_up wlan0}${addr wlan0}${endif}${endif}
 ]]
 conky.config = {
  alignment = 'top_left',
