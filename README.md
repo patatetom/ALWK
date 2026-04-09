@@ -138,11 +138,19 @@ cat > /etc/init.d/machostname <<\~~~
 #!/sbin/openrc-run
 depend()
 {
-	after hostname
+  after hostname
 }
 start()
 {
-	hostname AWK-$( tr -d ':' < /sys/class/net/eth0/address )
+  hostname AWK-$(
+    tr -d ':' < <(
+      grep -q up /sys/class/net/eth0/operstate &&
+      cat /sys/class/net/eth0/address || (
+        grep -q up /sys/class/net/wlan0/operstate
+        cat /sys/class/net/wlan0/address
+      )
+    )
+  )
 }
 ~~~
 chmod +x /etc/init.d/machostname
