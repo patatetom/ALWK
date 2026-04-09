@@ -200,10 +200,10 @@ service local start
 ```
 - configure system initialization (minimum, silent, and auto-login for `browser` user)
 > **no console access with this `/etc/inittab` configuration**<br/>
-> uncomment `#tty2::respawn:/sbin/getty 38400 tty2` for console access<br/>
+> uncomment `#tty2::respawn:/sbin/getty 38400 tty2` to retain console access<br/>
 > and/or uncomment `#ttyS0::respawn:/sbin/getty -L 0 ttyS0 vt100` for serial console access<br/>
-> and/or access AWK via secure shell<br/>
-> sleep may be added to make it easier to read assigned network address
+> and/or access AWK via secure shell (prefered)<br/>
+> sleep may be added (uncomment) to make it easier to read assigned network address (see also [conky](conky.md))
 ```sh
 cat > /etc/inittab <<~~~
 ::sysinit:clear
