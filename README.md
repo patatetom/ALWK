@@ -173,8 +173,14 @@ apk add jwm
 apk add chromium chromium-lang
 cat > /etc/X11/xorg.conf <<~~~
 Section "ServerFlags"
-	 Option "DontVTSwitch" "true"
-	 Option "DontZap" "true"
+  Option "DontVTSwitch" "true"
+  Option "DontZap" "true"
+EndSection
+Section "InputClass"
+  Identifier "touchpad"
+  MatchDriver "libinput"
+  MatchIsTouchpad "on"
+  Option "Tapping" "on"
 EndSection
 ~~~
 ```
