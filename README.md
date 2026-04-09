@@ -124,11 +124,14 @@ echo "
 GRUB_TIMEOUT_STYLE=hidden
 GRUB_DISABLE_OS_PROBER=true
 " >> /etc/default/grub
+rc-update add local default
+cat > /etc/local.d/grub.echo.stop <<~~~
+grep -q 'Loading Linux lts' /boot/grub/grub.cfg &&
 grub-mkconfig |
 sed -e "s/'Loading Linux lts/; echo '  Loading AWK/" \
     -e "/Loading initial ramdisk/d" > /boot/grub/grub.cfg
+~~~
 ```
-> after kernel/system upgrade, you should replay last command `grub-mkconfig | sed …`
 - make dynamic hostname (MAC based / multiple kiosks on same LAN)
 ```sh
 cat > /etc/init.d/machostname <<\~~~
@@ -173,7 +176,6 @@ EndSection
 ```
 - setup default web page
 ```sh
-rc-update add local default
 cat > /etc/local.d/default.web.page.start <<\~~~
 mkdir -p "${root:=/boot/efi/www}"
 ln -sf "$root" /
