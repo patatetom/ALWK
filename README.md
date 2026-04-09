@@ -167,7 +167,7 @@ echo "ssh-ed25519 … … … … … comment" > ~/.ssh/authorized_keys
 - install graphics server, applications and extensions
 ```sh
 setup-xorg-base
-apk add xf86-input-synaptics setxkbmap
+apk add setxkbmap
 apk add font-dejavu font-inconsolata font-liberation font-linux-libertine font-noto-emoji ttf-freefont
 apk add jwm
 apk add chromium chromium-lang
