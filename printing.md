@@ -6,7 +6,12 @@ printing support can be added to AWK using the following commands
 
 ```sh
 # add edge/community to repositories (hplip)
-echo "@edge http://mirrors.ircam.fr/pub/alpine/edge/community" >> /etc/apk/repositories
+if ! grep -q '^@edge http://mirrors' /etc/apk/repositories; then
+  cat >> /etc/apk/repositories << 'xxxxxxxx'
+
+@edge http://mirrors.ircam.fr/pub/alpine/edge/community
+xxxxxxxx
+fi
 apk update
 
 # hplip actually return error
@@ -32,7 +37,7 @@ apk add cups cups-filters
 # add cups to default runlevel
 rc-update add cupsd
 
-# start cups immediatly
+# start cups immediately
 rc-service cupsd start
 
 # let root manage cups
