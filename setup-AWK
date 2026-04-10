@@ -3,6 +3,21 @@ set -e
 
 ###############################################################################
 
+# this post-initial-installation script walks you through the various steps of
+# manual configuration and enables automatic configuration of AWK.
+
+## 1 download script
+# wget -O /tmp/setup-AWK \
+# "https://raw.githubusercontent.com/patatetom/AWK/refs/heads/main/setup-AWK"
+
+## 2 check script
+# less /tmp/setup-AWK
+
+## 3 run script
+# sh /tmp/setup-AWK
+
+###############################################################################
+
 apk add dnsmasq
 rc-update add dnsmasq
 cat > /etc/dnsmasq.conf << 'xxxxxxxx'
