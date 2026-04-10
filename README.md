@@ -228,9 +228,9 @@ xxxxxxxx
 - configure login for `browser` user (graphics server automatic startup at login)
 > `~/.chromium.tgz` is a pre-configuration for Chromium (view file in repository)
 ```sh
-cat > /home/browser/.profile <<~~~
+cat > /home/browser/.profile << 'xxxxxxxx'
 clear
-echo $'\n\n  Starting browser ...'
+printf '\n\n  Starting browser ...\n'
 export LANG=fr
 export LC_COLLATE=C
 rm -rf \
@@ -238,10 +238,10 @@ rm -rf \
   ~/.serverauth.* \
   ~/.cache/chromium \
   ~/.config/chromium \
-  &> /dev/null
-tar -C ~ -xf ~/.chromium.tgz &> /dev/null
-exec startx &> /dev/null
-~~~
+  > /dev/null 2>&1
+tar -C ~ -xf ~/.chromium.tgz > /dev/null 2>&1
+exec startx > /dev/null 2>&1
+xxxxxxxx
 ```
 - configure window manager's startup
 ```sh
