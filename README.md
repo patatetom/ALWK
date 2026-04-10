@@ -150,8 +150,9 @@ rc-service machostname start
 > generate an SSH key pair from administration workstation `ssh-keygen -t ed25519 -C comment -f ./AWK.key`<br/>
 > use content of public key `cat ./AWK.key.pub` below or copy public key to `~/.ssh/authorized_keys` at AWK
 ```sh
-mkdir ~/.ssh/
+mkdir -p ~/.ssh/
 echo "ssh-ed25519 … … … … … comment" > ~/.ssh/authorized_keys
+chmod 600 ~/.ssh/authorized_keys
 ```
 - install graphics server, applications and extensions
 ```sh
