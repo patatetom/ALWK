@@ -245,13 +245,13 @@ xxxxxxxx
 ```
 - configure window manager's startup
 ```sh
-cat > /home/browser/.xinitrc <<~~~
+cat > /home/browser/.xinitrc << 'xxxxxxxx'
 setxkbmap fr
 xset -dpms
 xset s off
 xset s noblank
 exec jwm
-~~~
+xxxxxxxx
 ```
 - set up web browser auto-start
 ```sh
