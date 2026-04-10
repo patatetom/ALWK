@@ -7,9 +7,9 @@ WiFi support can be added to AWK (laptop for example)
 apk add iwd
 
 # add iwd to boot runlevel
-rc-update add cupsd boot
+rc-update add iwd boot
 
-# start cups immediatly
+# start iwd immediatly
 rc-service iwd start
 
 # connect access point
@@ -19,10 +19,10 @@ iwctl station wlan0 get-networks
 # -----------------------------
 # Network name Security Signal
 # -----------------------------
-# AP           psk      ****
-iwctl station wlan0 connect AP psk
-# Type the network passphrase for AP psk.
+# SSID         psk      ****
+iwctl station wlan0 connect SSID psk
+# Type the network passphrase for SSID psk.
 # Passphrase: *********
 ```
 
-> `/var/lib/iwd/AP.psk` will be created to enable next re-associations
+> `/var/lib/iwd/SSID.psk` will be created to enable next re-associations
