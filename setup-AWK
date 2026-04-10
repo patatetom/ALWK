@@ -3,15 +3,18 @@ set -e
 
 ###############################################################################
 
-# this post-initial-installation script walks you through the various steps of
-# manual configuration and enables automatic configuration of AWK.
+## this post-initial-installation script walks you through the various steps of
+## manual configuration and enables automatic configuration of AWK.
+
+## changes may be necessary (SSH public key, disk sda, …)
+## be sure to select correct disk if there are multiple available
 
 ## 1 download script
 # wget -O /tmp/setup-AWK \
 # "https://raw.githubusercontent.com/patatetom/AWK/refs/heads/main/setup-AWK"
 
-## 2 check script
-# less /tmp/setup-AWK
+## 2 check/modify script
+# vi /tmp/setup-AWK
 
 ## 3 run script
 # sh /tmp/setup-AWK
