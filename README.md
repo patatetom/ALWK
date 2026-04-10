@@ -302,16 +302,17 @@ xxxxxxxx
 - disable `file://` scheme (except for default web page) et fix download directory
 ```sh
 mkdir -p /etc/chromium/policies/managed/
-cat > /etc/chromium/policies/managed/AWK.json <<~~~
+cat > /etc/chromium/policies/managed/AWK.json << 'xxxxxxxx'
 {
   "URLAllowlist": ["file:///www/"],
   "URLBlocklist": ["file://"],
   "DownloadRestrictions": 3,
   "DownloadDirectory": "/tmp/"
 }
-~~~
+xxxxxxxx
 ```
 - install provided pre-configuration (optional)
+> this file is used in `/home/browser/.profile`
 ```
 wget -O /home/browser/.chromium.tgz \
 https://github.com/patatetom/AWK/raw/refs/heads/main/chromium.config.tgz
