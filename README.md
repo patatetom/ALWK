@@ -56,7 +56,7 @@ _«&nbsp;a web kiosk is a self-service computer terminal accessible to the publi
 ```sh
 apk add dnsmasq
 rc-update add dnsmasq
-cat > /etc/dnsmasq.conf << 'XXXX'
+cat > /etc/dnsmasq.conf << 'xxxxxxxx'
 resolv-file=/etc/resolv.dnsmasq
 domain-needed
 bogus-priv
@@ -65,11 +65,11 @@ no-dhcp-interface=lo
 listen-address=127.0.0.1,::1
 bind-interfaces
 cache-size=2048
-XXXX
-cat > /etc/resolv.conf << 'XXXX'
+xxxxxxxx
+cat > /etc/resolv.conf << 'xxxxxxxx'
 nameserver 127.0.0.1
 nameserver ::1
-XXXX
+xxxxxxxx
 chattr +i /etc/resolv.conf
 rc-service dnsmasq start
 echo 'RESOLV_CONF="/etc/resolv.dnsmasq"' > /etc/udhcpc/udhcpc.conf
@@ -77,30 +77,17 @@ rc-service networking restart
 ```
 - modify EFI System Partition (ESP)
 > installation is assumed to have been performed under EFI/UEFI<br/>
-> if this is not case, only run last command `dosfslabel …`<br/>
-> `c\n1\nAWK\nc\n2\nSWAP\nc\n3\nROOT\n` part is optional
+> if this is not case, only run last command `dosfslabel …`
 ```sh
 apk add gptfdisk
-gdisk /dev/sda <<~~~
-t
-1
-0700
-c
-1
-AWK
-c
-2
-SWAP
-c
-3
-ROOT
-w
-y
-~~~
+sgdisk /dev/sda \
+    --typecode=1:0700 --change-name=1:AWK \
+    --typecode=2:8200 --change-name=2:SWAP \
+    --typecode=3:8300 --change-name=3:ROOT
 apk add mtools
 echo 'drive e: file="/dev/sda1"' > /etc/mtools.conf
 mattrib +h +s e:/efi 2> /dev/null
-dosfslabel /dev/sda1 AWK &> /dev/null
+dosfslabel /dev/sda1 AWK > /dev/null 2>&1
 ```
 - make few minor changes
 ```sh
@@ -363,7 +350,7 @@ https://github.com/patatetom/AWK/
 - BTRFS file system is preferred over EXT4 when installing on removable USB media (portable kiosk)
 - [audio](audio.md) and [printing](printing.md) are not natively supported
 - press `ESC` at boot to access GRUB bootloader and press `E` to edit/add/change kernel parameters
-- transferring AWK from one media storage to another usually requires fixing GPT : use `gdisk` to fix it (some EFI/UEFI platforms refuse to boot if GPT is invalid)
+- transferring AWK from one media storage to another usually requires fixing GPT (some EFI/UEFI platforms refuse to boot if backup GPT is not valid)
 
 
 
