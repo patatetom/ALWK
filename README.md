@@ -107,8 +107,7 @@ apk add linux-firmware
 chmod -x /etc/grub.d/*
 chmod +x /etc/grub.d/00_header
 chmod +x /etc/grub.d/10_linux
-if ! grep -q 'GRUB_TIMEOUT_STYLE=hidden' /etc/default/grub
-then
+if ! grep -q 'GRUB_TIMEOUT_STYLE=hidden' /etc/default/grub; then
   printf '\nGRUB_TIMEOUT_STYLE=hidden\nGRUB_DISABLE_OS_PROBER=true\n' \
     >> /etc/default/grub
 fi
@@ -126,7 +125,7 @@ chmod +x /etc/local.d/grub.echo.stop
 ```
 - make dynamic hostname (MAC based / multiple kiosks on same LAN)
 ```sh
-cat > /etc/init.d/machostname <<\~~~
+cat > /etc/init.d/machostname << 'xxxxxxxx'
 #!/sbin/openrc-run
 depend()
 {
@@ -134,20 +133,18 @@ depend()
 }
 start()
 {
-  hostname AWK-$(
-    tr -d ':' < <(
-      grep -q up /sys/class/net/eth0/operstate &&
-      cat /sys/class/net/eth0/address || (
-        grep -q up /sys/class/net/wlan0/operstate
-        cat /sys/class/net/wlan0/address
-      )
-    )
-  )
+  iface=eth0
+  if ! grep -q up /sys/class/net/eth0/operstate; then
+    if grep -q up /sys/class/net/wlan0/operstate; then
+      iface=wlan0
+    fi
+  fi
+  hostname AWK-$( tr -d ':' < /sys/class/net/"$iface"/address )
 }
-~~~
+xxxxxxxx
 chmod +x /etc/init.d/machostname
 rc-update add machostname boot
-service machostname start
+rc-service machostname start
 ```
 - configure remote access (remote administration)
 > generate an SSH key pair from administration workstation `ssh-keygen -t ed25519 -C comment -f ./AWK.key`<br/>
