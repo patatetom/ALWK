@@ -209,21 +209,21 @@ rc-service local start
 > and/or access AWK via secure shell (prefered)<br/>
 > sleep may be added (uncomment) to make it easier to read assigned network address (see also [conky](conky.md))
 ```sh
-cat > /etc/inittab <<~~~
+cat > /etc/inittab << 'xxxxxxxx'
 ::sysinit:clear
-::sysinit:echo $'\n\n  Starting AWK ...\n\n'
-::sysinit:/sbin/openrc sysinit   -q > /dev/null
-::sysinit:/sbin/openrc boot      -q > /dev/null
+::sysinit:printf '\n\n  Starting AWK ...\n\n'
+::sysinit:/sbin/openrc sysinit -q > /dev/null
+::sysinit:/sbin/openrc boot -q > /dev/null
 #::sysinit:sleep 3s
-::wait:/sbin/openrc default      -q > /dev/null
+::wait:/sbin/openrc default -q > /dev/null
 tty1::respawn:/bin/login -f browser
 #tty2::respawn:/sbin/getty 38400 tty2
 #ttyS0::respawn:/sbin/getty -L 0 ttyS0 vt100
 ::ctrlaltdel:clear
-::ctrlaltdel:/sbin/reboot        -q > /dev/null
+::ctrlaltdel:/sbin/reboot -q > /dev/null
 ::shutdown:clear
 ::shutdown:/sbin/openrc shutdown -q > /dev/null
-~~~
+xxxxxxxx
 ```
 - configure login for `browser` user (graphics server automatic startup at login)
 > `~/.chromium.tgz` is a pre-configuration for Chromium (view file in repository)
