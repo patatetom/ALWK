@@ -161,7 +161,7 @@ apk add setxkbmap
 apk add font-dejavu font-inconsolata font-liberation font-linux-libertine font-noto-emoji ttf-freefont
 apk add jwm
 apk add chromium chromium-lang
-cat > /etc/X11/xorg.conf <<~~~
+cat > /etc/X11/xorg.conf << 'xxxxxxxx'
 Section "ServerFlags"
   Option "DontVTSwitch" "true"
   Option "DontZap" "true"
@@ -173,7 +173,7 @@ Section "InputClass"
   Option "Tapping" "on"
   Option "NaturalScrolling" "on"
 EndSection
-~~~
+xxxxxxxx
 ```
 - setup default web page
 ```sh
