@@ -177,14 +177,15 @@ xxxxxxxx
 ```
 - setup default web page
 ```sh
-cat > /etc/local.d/default.web.page.start <<\~~~
+cat > /etc/local.d/default.web.page.start << 'xxxxxxxx'
+#!/bin/sh
 mkdir -p "${root:=/boot/efi/www}"
 ln -sf "$root" /
-[ -f "${index:=$root/AWK.html}" ] ||
-echo '<html style="background-color:#0E5980;color:#00ccff;font-family:sans;font-style:italic;font-weight:bold">
+if [ ! -f "${index:=$root/AWK.html}" ]; then
+  cat > "$index" << 'oooooooo'
+<html style="background-color:#0E5980;color:#00ccff;font-family:sans;font-style:italic;font-weight:bold">
 <title>AWK</title>
-<div style="font-size:4em;text-align:center">
-<br/><br/>
+<div style="font-size:4em;text-align:center"><br/><br/>
 <svg width="256" height="132" xmlns="http://www.w3.org/2000/svg">
 <path style="fill:#0e5980;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-linecap:round;stroke-linejoin:round;paint-order:fill markers stroke" d="M16 0h224c8.864 0 16 7.136 16 16v100c0 8.864-7.136 16-16 16H16c-8.864 0-16-7.136-16-16V16C0 7.136 7.136 0 16 0Z"/>
 <g stroke="#000" stroke-linejoin="round" stroke-width="16.83"><path d="m9.662 93.904 85.171-83.137 85.171 83.137M248.142 93.904 171.487 19.08l-17.034 16.628M79.282 68.963v24.941" style="fill:none;stroke:#fff;stroke-opacity:1" transform="translate(-.902 -1.227)"/></g>
@@ -194,10 +195,12 @@ echo '<html style="background-color:#0E5980;color:#00ccff;font-family:sans;font-
 </svg>
 </br>Alpine Web Kiosk
 </div>
-</html>' > "$index"
-~~~
+</html>
+oooooooo
+fi
+xxxxxxxx
 chmod +x /etc/local.d/default.web.page.start
-service local start
+rc-service local start
 ```
 - configure system initialization (minimum, silent, and auto-login for `browser` user)
 > **no console access with this `/etc/inittab` configuration**<br/>
