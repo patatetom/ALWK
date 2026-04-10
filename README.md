@@ -107,18 +107,22 @@ apk add linux-firmware
 chmod -x /etc/grub.d/*
 chmod +x /etc/grub.d/00_header
 chmod +x /etc/grub.d/10_linux
-grep -q 'GRUB_TIMEOUT_STYLE=hidden' /etc/default/grub ||
-echo '
-GRUB_TIMEOUT_STYLE=hidden
-GRUB_DISABLE_OS_PROBER=true
-' >> /etc/default/grub
+if ! grep -q 'GRUB_TIMEOUT_STYLE=hidden' /etc/default/grub
+then
+  printf '\nGRUB_TIMEOUT_STYLE=hidden\nGRUB_DISABLE_OS_PROBER=true\n' \
+    >> /etc/default/grub
+fi
 rc-update add local default
-cat > /etc/local.d/grub.echo.stop <<~~~
-grep -q 'Loading Linux lts' /boot/grub/grub.cfg &&
-grub-mkconfig |
-sed -e "s/'Loading Linux lts/; echo '  Loading AWK/" \
-    -e "/Loading initial ramdisk/d" > /boot/grub/grub.cfg
-~~~
+cat > /etc/local.d/grub.echo.stop << 'xxxxxxxx'
+#!/bin/sh
+if grep -q 'Loading Linux lts' /boot/grub/grub.cfg; then
+  grub-mkconfig \
+    | sed -e "s/'Loading Linux lts/; echo '  Loading AWK/" \
+          -e '/Loading initial ramdisk/d' \
+    > /boot/grub/grub.cfg
+fi
+xxxxxxxx
+chmod +x /etc/local.d/grub.echo.stop
 ```
 - make dynamic hostname (MAC based / multiple kiosks on same LAN)
 ```sh
