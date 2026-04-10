@@ -1,53 +1,46 @@
+#!/bin/sh
+set -e
+
+###############################################################################
+
 apk add dnsmasq
 rc-update add dnsmasq
-cat > /etc/dnsmasq.conf <<~~~
+cat > /etc/dnsmasq.conf << 'xxxxxxxx'
 resolv-file=/etc/resolv.dnsmasq
 domain-needed
 bogus-priv
 interface=lo
-no-dhcp-interface=
+no-dhcp-interface=lo
 listen-address=127.0.0.1,::1
 bind-interfaces
 cache-size=2048
-~~~
-cat > /etc/resolv.conf <<~~~
+xxxxxxxx
+cat > /etc/resolv.conf << 'xxxxxxxx'
 nameserver 127.0.0.1
 nameserver ::1
-~~~
+xxxxxxxx
 chattr +i /etc/resolv.conf
 rc-service dnsmasq start
 echo 'RESOLV_CONF="/etc/resolv.dnsmasq"' > /etc/udhcpc/udhcpc.conf
-service networking restart
+rc-service networking restart
 
 ###############################################################################
 
 apk add gptfdisk
-gdisk /dev/sda <<~~~
-t
-1
-0700
-c
-1
-AWK
-c
-2
-SWAP
-c
-3
-ROOT
-w
-y
-~~~
+sgdisk /dev/sda \
+    --typecode=1:0700 --change-name=1:AWK \
+    --typecode=2:8200 --change-name=2:SWAP \
+    --typecode=3:8300 --change-name=3:ROOT
 apk add mtools
 echo 'drive e: file="/dev/sda1"' > /etc/mtools.conf
 mattrib +h +s e:/efi 2> /dev/null
-dosfslabel /dev/sda1 AWK &> /dev/null
+dosfslabel /dev/sda1 AWK > /dev/null 2>&1
 
 ###############################################################################
 
-echo -n | tee /etc/issue > /etc/motd
+: | tee /etc/issue > /etc/motd
 sed -i 's/^wheel:x:10:root,browser/wheel:x:10:root/' /etc/group
-sed -i -r \
+sed -i -E \
   -e '/^\/dev\/(cdrom|usb)/d' \
   -e 's/iocharset=utf8/iocharset=iso8859-1,utf8/' \
   /etc/fstab
@@ -61,22 +54,25 @@ apk add linux-firmware
 chmod -x /etc/grub.d/*
 chmod +x /etc/grub.d/00_header
 chmod +x /etc/grub.d/10_linux
-grep -q 'GRUB_TIMEOUT_STYLE=hidden' /etc/default/grub ||
-echo '
-GRUB_TIMEOUT_STYLE=hidden
-GRUB_DISABLE_OS_PROBER=true
-' >> /etc/default/grub
+if ! grep -q 'GRUB_TIMEOUT_STYLE=hidden' /etc/default/grub; then
+  printf '\nGRUB_TIMEOUT_STYLE=hidden\nGRUB_DISABLE_OS_PROBER=true\n' \
+    >> /etc/default/grub
+fi
 rc-update add local default
-cat > /etc/local.d/grub.echo.stop <<~~~
-grep -q 'Loading Linux lts' /boot/grub/grub.cfg &&
-grub-mkconfig |
-sed -e "s/'Loading Linux lts/; echo '  Loading AWK/" \
-    -e "/Loading initial ramdisk/d" > /boot/grub/grub.cfg
-~~~
+cat > /etc/local.d/grub.echo.stop << 'xxxxxxxx'
+#!/bin/sh
+if grep -q 'Loading Linux lts' /boot/grub/grub.cfg; then
+  grub-mkconfig \
+    | sed -e "s/'Loading Linux lts/; echo '  Loading AWK/" \
+          -e '/Loading initial ramdisk/d' \
+    > /boot/grub/grub.cfg
+fi
+xxxxxxxx
+chmod +x /etc/local.d/grub.echo.stop
 
 ###############################################################################
 
-cat > /etc/init.d/machostname <<\~~~
+cat > /etc/init.d/machostname << 'xxxxxxxx'
 #!/sbin/openrc-run
 depend()
 {
@@ -84,25 +80,24 @@ depend()
 }
 start()
 {
-  hostname AWK-$(
-    tr -d ':' < <(
-      grep -q up /sys/class/net/eth0/operstate &&
-      cat /sys/class/net/eth0/address || (
-        grep -q up /sys/class/net/wlan0/operstate
-        cat /sys/class/net/wlan0/address
-      )
-    )
-  )
+  iface=eth0
+  if ! grep -q up /sys/class/net/eth0/operstate; then
+    if grep -q up /sys/class/net/wlan0/operstate; then
+      iface=wlan0
+    fi
+  fi
+  hostname AWK-$( tr -d ':' < /sys/class/net/"$iface"/address )
 }
-~~~
+xxxxxxxx
 chmod +x /etc/init.d/machostname
 rc-update add machostname boot
-service machostname start
+rc-service machostname start
 
 ###############################################################################
 
-mkdir ~/.ssh/
+mkdir -p ~/.ssh/
 echo "ssh-ed25519 … … … … … comment" > ~/.ssh/authorized_keys
+chmod 600 ~/.ssh/authorized_keys
 
 ###############################################################################
 
@@ -111,7 +106,7 @@ apk add setxkbmap
 apk add font-dejavu font-inconsolata font-liberation font-linux-libertine font-noto-emoji ttf-freefont
 apk add jwm
 apk add chromium chromium-lang
-cat > /etc/X11/xorg.conf <<~~~
+cat > /etc/X11/xorg.conf << 'xxxxxxxx'
 Section "ServerFlags"
   Option "DontVTSwitch" "true"
   Option "DontZap" "true"
@@ -123,18 +118,19 @@ Section "InputClass"
   Option "Tapping" "on"
   Option "NaturalScrolling" "on"
 EndSection
-~~~
+xxxxxxxx
 
 ###############################################################################
 
-cat > /etc/local.d/default.web.page.start <<\~~~
+cat > /etc/local.d/default.web.page.start << 'xxxxxxxx'
+#!/bin/sh
 mkdir -p "${root:=/boot/efi/www}"
 ln -sf "$root" /
-[ -f "${index:=$root/AWK.html}" ] ||
-echo '<html style="background-color:#0E5980;color:#00ccff;font-family:sans;font-style:italic;font-weight:bold">
+if [ ! -f "${index:=$root/AWK.html}" ]; then
+  cat > "$index" << 'oooooooo'
+<html style="background-color:#0E5980;color:#00ccff;font-family:sans;font-style:italic;font-weight:bold">
 <title>AWK</title>
-<div style="font-size:4em;text-align:center">
-<br/><br/>
+<div style="font-size:4em;text-align:center"><br/><br/>
 <svg width="256" height="132" xmlns="http://www.w3.org/2000/svg">
 <path style="fill:#0e5980;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-linecap:round;stroke-linejoin:round;paint-order:fill markers stroke" d="M16 0h224c8.864 0 16 7.136 16 16v100c0 8.864-7.136 16-16 16H16c-8.864 0-16-7.136-16-16V16C0 7.136 7.136 0 16 0Z"/>
 <g stroke="#000" stroke-linejoin="round" stroke-width="16.83"><path d="m9.662 93.904 85.171-83.137 85.171 83.137M248.142 93.904 171.487 19.08l-17.034 16.628M79.282 68.963v24.941" style="fill:none;stroke:#fff;stroke-opacity:1" transform="translate(-.902 -1.227)"/></g>
@@ -144,34 +140,36 @@ echo '<html style="background-color:#0E5980;color:#00ccff;font-family:sans;font-
 </svg>
 </br>Alpine Web Kiosk
 </div>
-</html>' > "$index"
-~~~
+</html>
+oooooooo
+fi
+xxxxxxxx
 chmod +x /etc/local.d/default.web.page.start
-service local start
+rc-service local start
 
 ###############################################################################
 
-cat > /etc/inittab <<~~~
+cat > /etc/inittab << 'xxxxxxxx'
 ::sysinit:clear
-::sysinit:echo $'\n\n  Starting AWK ...\n\n'
-::sysinit:/sbin/openrc sysinit   -q > /dev/null
-::sysinit:/sbin/openrc boot      -q > /dev/null
+::sysinit:printf '\n\n  Starting AWK ...\n\n'
+::sysinit:/sbin/openrc sysinit -q > /dev/null
+::sysinit:/sbin/openrc boot -q > /dev/null
 #::sysinit:sleep 3s
-::wait:/sbin/openrc default      -q > /dev/null
+::wait:/sbin/openrc default -q > /dev/null
 tty1::respawn:/bin/login -f browser
 #tty2::respawn:/sbin/getty 38400 tty2
 #ttyS0::respawn:/sbin/getty -L 0 ttyS0 vt100
 ::ctrlaltdel:clear
-::ctrlaltdel:/sbin/reboot        -q > /dev/null
+::ctrlaltdel:/sbin/reboot -q > /dev/null
 ::shutdown:clear
 ::shutdown:/sbin/openrc shutdown -q > /dev/null
-~~~
+xxxxxxxx
 
 ###############################################################################
 
-cat > /home/browser/.profile <<~~~
+cat > /home/browser/.profile << 'xxxxxxxx'
 clear
-echo $'\n\n  Starting browser ...'
+printf '\n\n  Starting browser ...\n'
 export LANG=fr
 export LC_COLLATE=C
 rm -rf \
@@ -179,31 +177,33 @@ rm -rf \
   ~/.serverauth.* \
   ~/.cache/chromium \
   ~/.config/chromium \
-  &> /dev/null
-tar -C ~ -xf ~/.chromium.tgz &> /dev/null
-exec startx &> /dev/null
-~~~
+  > /dev/null 2>&1
+tar -C ~ -xf ~/.chromium.tgz > /dev/null 2>&1
+exec startx > /dev/null 2>&1
+xxxxxxxx
 
 ###############################################################################
 
-cat > /home/browser/.xinitrc <<~~~
+cat > /home/browser/.xinitrc << 'xxxxxxxx'
 setxkbmap fr
 xset -dpms
 xset s off
 xset s noblank
 exec jwm
-~~~
+xxxxxxxx
 
 ###############################################################################
 
-cat > /home/browser/.jwmrc <<\~~~
+cat > /home/browser/.jwmrc << 'xxxxxxxx'
 <?xml version="1.0" encoding="UTF-8"?>
 <JWM>
-<Key mask="A" key="Tab">nextstacked</Key>
-<Key mask="AS" key="Tab">prevstacked</Key>
 <StartupCommand>
-yes '' | head -256 > /dev/tty1
 clear > /dev/tty1
+if [ -f "${urls:=/boot/efi/urls.txt}" ]; then
+  urls=$( grep -E '^(file|http(s)?)://' "$urls" )
+else
+  urls=file:///www/AWK.html
+fi
 chromium \
   --start-maximized \
   --no-first-run \
@@ -223,11 +223,7 @@ chromium \
   --disk-cache-size=0 \
   --password-store=basic \
   --noerrdialogs \
-  $(
-  [ -f "${urls:=/boot/efi/urls.txt}" ] &&
-  grep -E '^(file|http(s)?)://' "$urls" ||
-  echo file:///www/AWK.html
-  )
+  "$urls"
 rm -rf \
   ~/.serverauth.* \
   ~/.cache/chromium \
@@ -235,19 +231,19 @@ rm -rf \
 jwm -exit
 </StartupCommand>
 </JWM>
-~~~
+xxxxxxxx
 
 ###############################################################################
 
 mkdir -p /etc/chromium/policies/managed/
-cat > /etc/chromium/policies/managed/AWK.json <<~~~
+cat > /etc/chromium/policies/managed/AWK.json << 'xxxxxxxx'
 {
   "URLAllowlist": ["file:///www/"],
   "URLBlocklist": ["file://"],
   "DownloadRestrictions": 3,
   "DownloadDirectory": "/tmp/"
 }
-~~~
+xxxxxxxx
 
 wget -O /home/browser/.chromium.tgz \
 https://github.com/patatetom/AWK/raw/refs/heads/main/chromium.config.tgz
