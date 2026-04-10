@@ -14,24 +14,25 @@ apk add sof-firmware
 # add pulseaudio, set default volume to 100% on all output
 # and switch on new device
 apk add pulseaudio pulseaudio-utils
-grep -q 'volume @DEFAULT_SINK@ 0x10000' /etc/pulse/default.pa ||
-echo '
-set-sink-volume @DEFAULT_SINK@ 0x10000
-load-module module-switch-on-connect
-' >> /etc/pulse/default.pa
+if ! grep -q 'volume @DEFAULT_SINK@ 0x10000' /etc/pulse/default.pa; then
+  printf '\nset-sink-volume @DEFAULT_SINK@ 0x10000\nload-module module-switch-on-connect\n' \
+    >> /etc/pulse/default.pa
+fi
 
 # add output/volume control and bind [Window]-[S] (sound)
 # or [Window]-[V] (volume) to pavucontrol
 apk add pavucontrol xbindkeys
 mkdir -p /home/browser/.config
-cat > /home/browser/.config/pavucontrol.ini <<~~~
+
+cat > /home/browser/.config/pavucontrol.ini << 'xxxxxxxx'
 [window]
 width=688
 height=442
 showVolumeMeters=1
 hideUnavailableCardProfiles=1
-~~~
-cat > /home/browser/.xbindkeysrc <<~~~
+xxxxxxxx
+
+cat > /home/browser/.xbindkeysrc << 'xxxxxxxx'
 "killall pavucontrol; pavucontrol &"
   Mod4 + S
 "killall pavucontrol; pavucontrol &"
@@ -52,7 +53,7 @@ cat > /home/browser/.xbindkeysrc <<~~~
   XF86AudioMicMute
 "pactl set-source-mute @DEFAULT_SOURCE@ toggle"
   Mod4 + 4
-~~~
+xxxxxxxx
 
 reboot
 ```
