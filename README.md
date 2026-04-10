@@ -52,6 +52,10 @@ _«&nbsp;a web kiosk is a self-service computer terminal accessible to the publi
 
 - boot AWK from media storage selected during installation
 - login as `root` with defined password
+
+> [!TIP]
+> entire configuration process described below can be automated using [setup-AWK](setup-AWK) script
+
 - change domain name resolution
 ```sh
 apk add dnsmasq
