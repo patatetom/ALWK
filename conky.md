@@ -7,7 +7,7 @@ you can optionally add Conky to AWK to display system information on the desktop
 apk add conky
 
 # configure conky
-cat > /home/browser/.conkyrc <<\~~~
+cat > /home/browser/.conkyrc << 'xxxxxxxx'
 conky.text = [[
 ${color grey}CLOCK :$color ${time %Y-%m-%d %H:%M}
 ${color grey}UPTIME:$color $uptime
@@ -55,11 +55,12 @@ conky.config = {
  use_spacer = 'none',
  use_xft = true
 }
-~~~
+xxxxxxxx
 
 # automatically start conky
-grep -q conky /home/browser/.xinitrc ||
-  sed -i '1i conky' /home/browser/.xinitrc
+if ! grep -q conky /home/browser/.xinitrc; then
+  sed -i '1s/^/conky\n/' /home/browser/.xinitrc
+fi
 ```
 
 ![Conky system informations on desktop](conky.webp)
