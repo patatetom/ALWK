@@ -91,9 +91,9 @@ dosfslabel /dev/sda1 AWK > /dev/null 2>&1
 ```
 - make few minor changes
 ```sh
-echo -n | tee /etc/issue > /etc/motd
+: | tee /etc/issue > /etc/motd
 sed -i 's/^wheel:x:10:root,browser/wheel:x:10:root/' /etc/group
-sed -i -r \
+sed -i -E \
   -e '/^\/dev\/(cdrom|usb)/d' \
   -e 's/iocharset=utf8/iocharset=iso8859-1,utf8/' \
   /etc/fstab
