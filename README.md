@@ -79,7 +79,7 @@ rc-service networking restart
 > installation is assumed to have been performed under EFI/UEFI<br/>
 > if this is not case, only run last command `dosfslabel …`
 ```sh
-apk add gptfdisk
+apk add sgdisk
 sgdisk /dev/sda \
     --typecode=1:0700 --change-name=1:AWK \
     --typecode=2:8200 --change-name=2:SWAP \
