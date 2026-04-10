@@ -255,14 +255,16 @@ xxxxxxxx
 ```
 - set up web browser auto-start
 ```sh
-cat > /home/browser/.jwmrc <<\~~~
+cat > /home/browser/.jwmrc << 'xxxxxxxx'
 <?xml version="1.0" encoding="UTF-8"?>
 <JWM>
-<Key mask="A" key="Tab">nextstacked</Key>
-<Key mask="AS" key="Tab">prevstacked</Key>
 <StartupCommand>
-yes '' | head -256 > /dev/tty1
 clear > /dev/tty1
+if [ -f "${urls:=/boot/efi/urls.txt}" ]; then
+  urls=$( grep -E '^(file|http(s)?)://' "$urls" )
+else
+  urls=file:///www/AWK.html
+fi
 chromium \
   --start-maximized \
   --no-first-run \
@@ -282,11 +284,7 @@ chromium \
   --disk-cache-size=0 \
   --password-store=basic \
   --noerrdialogs \
-  $(
-  [ -f "${urls:=/boot/efi/urls.txt}" ] &&
-  grep -E '^(file|http(s)?)://' "$urls" ||
-  echo file:///www/AWK.html
-  )
+  "$urls"
 rm -rf \
   ~/.serverauth.* \
   ~/.cache/chromium \
@@ -294,7 +292,7 @@ rm -rf \
 jwm -exit
 </StartupCommand>
 </JWM>
-~~~
+xxxxxxxx
 ```
 
 
