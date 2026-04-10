@@ -66,6 +66,7 @@ listen-address=127.0.0.1,::1
 bind-interfaces
 cache-size=2048
 xxxxxxxx
+chattr -i /etc/resolv.conf
 cat > /etc/resolv.conf << 'xxxxxxxx'
 nameserver 127.0.0.1
 nameserver ::1
@@ -133,13 +134,7 @@ depend()
 }
 start()
 {
-  iface=eth0
-  if ! grep -q up /sys/class/net/eth0/operstate; then
-    if grep -q up /sys/class/net/wlan0/operstate; then
-      iface=wlan0
-    fi
-  fi
-  hostname AWK-$( tr -d ':' < /sys/class/net/"$iface"/address )
+  hostname AWK-$( tr -d ':' < /sys/class/net/eth0/address )
 }
 xxxxxxxx
 chmod +x /etc/init.d/machostname
