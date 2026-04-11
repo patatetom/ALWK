@@ -41,7 +41,7 @@ rc-update add cupsd
 rc-service cupsd start
 
 # let root manage cups
-sed -i 's/^lpadmin:x:105:$/lpadmin:x:105:root/' /etc/group
+sed -i -E 's/^(lpadmin:x:[^:]+):/\1:root/' /etc/group
 
 # let root redirect local port
 sed -i -E 's/^(AllowTcpForwarding) no$/\1 yes\npermitopen="127.0.0.1:*"/' /etc/ssh/sshd_config
