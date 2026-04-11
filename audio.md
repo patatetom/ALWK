@@ -15,8 +15,11 @@ apk add sof-firmware
 # and switch on new device
 apk add pulseaudio pulseaudio-utils
 if ! grep -q 'volume @DEFAULT_SINK@ 0x10000' /etc/pulse/default.pa; then
-  printf '\nset-sink-volume @DEFAULT_SINK@ 0x10000\nload-module module-switch-on-connect\n' \
-    >> /etc/pulse/default.pa
+  cat >> /etc/pulse/default.pa << 'xxxxxxxx'
+
+set-sink-volume @DEFAULT_SINK@ 0x10000
+load-module module-switch-on-connect
+xxxxxxxx
 fi
 
 # add output/volume control and bind [Window]-[S] (sound)
