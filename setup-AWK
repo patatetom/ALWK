@@ -93,8 +93,6 @@ if grep -q 'Loading Linux lts' /boot/grub/grub.cfg; then
 fi
 xxxxxxxx
 chmod +x /etc/local.d/grub.echo.stop
-xxxxxxxx
-chmod +x /etc/local.d/grub.echo.stop
 
 ###############################################################################
 
