@@ -286,7 +286,7 @@ chromium \
   --disk-cache-size=0 \
   --password-store=basic \
   --noerrdialogs \
-  "$urls"
+  $urls
 rm -rf \
   ~/.serverauth.* \
   ~/.cache/chromium \
