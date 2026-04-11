@@ -1,0 +1,163 @@
+#!/bin/sh
+set -e
+
+###############################################################################
+
+## this post-configuration script walks you through the various steps of
+## manual configuration and enables automatic extra configuration of AWK.
+
+## 1 download script
+# wget -O /tmp/setup-extra-AWK \
+# "https://raw.githubusercontent.com/patatetom/AWK/refs/heads/main/setup-extra-AWK"
+
+## 2 check/modify script
+# vi /tmp/setup-extra-AWK
+
+## 3 run script
+# sh /tmp/setup-extra-AWK
+
+###############################################################################
+
+apk add conky
+cat > /home/browser/.conkyrc << 'xxxxxxxx'
+conky.text = [[
+${color grey}HOST  :$color ${nodename}
+${color grey}CLOCK :$color ${time %Y-%m-%d %H:%M}
+${color grey}UPTIME:$color $uptime_short
+${color grey}RAM   :$color $memperc%${goto 128}${membar 12}
+${color grey}SWAP  :$color $swapperc%${goto 128}${swapbar 12}
+${color grey}CPU   :$color $cpu%${goto 128}${cpubar 12}
+${color grey}DISK  :$color $fs_used_perc%${goto 128}${fs_bar 12 /}
+${if_up eth0}${color grey}ETH0  :$color ${addr eth0}${endif}
+${if_up wlan0}${color grey}WLAN0 :$color ${addr wlan0}${endif}
+]]
+conky.config = {
+ alignment = 'top_left',
+ background = true,
+ border_width = 1,
+ cpu_avg_samples = 3,
+ default_color = 'white',
+ default_outline_color = 'white',
+ default_shade_color = 'white',
+ double_buffer = true,
+ draw_borders = false,
+ draw_graph_borders = true,
+ draw_outline = false,
+ draw_shades = false,
+ extra_newline = false,
+ font = 'DejaVu Sans Mono:size=12',
+ gap_x = 60,
+ gap_y = 60,
+ minimum_height = 5,
+ minimum_width = 5,
+ net_avg_samples = 2,
+ no_buffers = true,
+ out_to_console = false,
+ out_to_ncurses = false,
+ out_to_stderr = false,
+ out_to_wayland = false,
+ out_to_x = true,
+ own_window = true,
+ own_window_class = 'Conky',
+ own_window_type = 'normal',
+ own_window_hints = 'undecorated,sticky,below,skip_taskbar,skip_pager',
+ show_graph_range = false,
+ show_graph_scale = false,
+ stippled_borders = 0,
+ update_interval = 3.0,
+ uppercase = false,
+ use_spacer = 'none',
+ use_xft = true
+}
+xxxxxxxx
+if ! grep -q '^conky' /home/browser/.xinitrc; then
+  sed -i '1s/^/conky\n/' /home/browser/.xinitrc
+fi
+
+###############################################################################
+
+apk add dbus
+rc-update add dbus
+rc-service dbus start
+apk add sof-firmware
+apk add pulseaudio pulseaudio-utils
+if ! grep -q 'volume @DEFAULT_SINK@ 0x10000' /etc/pulse/default.pa; then
+  cat >> /etc/pulse/default.pa << 'xxxxxxxx'
+
+set-sink-volume @DEFAULT_SINK@ 0x10000
+load-module module-switch-on-connect
+xxxxxxxx
+fi
+apk add pavucontrol xbindkeys
+mkdir -p /home/browser/.config
+cat > /home/browser/.config/pavucontrol.ini << 'xxxxxxxx'
+[window]
+width=688
+height=442
+showVolumeMeters=1
+hideUnavailableCardProfiles=1
+xxxxxxxx
+cat > /home/browser/.xbindkeysrc << 'xxxxxxxx'
+"killall pavucontrol; pavucontrol &"
+  Mod4 + S
+"killall pavucontrol; pavucontrol &"
+  Mod4 + V
+"pactl set-sink-volume @DEFAULT_SINK@ +1000"
+  XF86AudioRaiseVolume
+"pactl set-sink-volume @DEFAULT_SINK@ +1000"
+  Mod4 + 2
+"pactl set-sink-volume @DEFAULT_SINK@ -1000"
+  XF86AudioLowerVolume
+"pactl set-sink-volume @DEFAULT_SINK@ -1000"
+  Mod4 + 3
+"pactl set-sink-mute @DEFAULT_SINK@ toggle"
+  XF86AudioMute
+"pactl set-sink-mute @DEFAULT_SINK@ toggle"
+  Mod4 + 1
+"pactl set-source-mute @DEFAULT_SOURCE@ toggle"
+  XF86AudioMicMute
+"pactl set-source-mute @DEFAULT_SOURCE@ toggle"
+  Mod4 + 4
+xxxxxxxx
+if ! grep -q '^xbindkeys' /home/browser/.xinitrc; then
+  sed -i '1s/^/xbindkeys\n/' /home/browser/.xinitrc
+fi
+
+###############################################################################
+
+if ! grep -q '^@edge http://mirrors' /etc/apk/repositories; then
+  cat >> /etc/apk/repositories << 'xxxxxxxx'
+
+@edge http://mirrors.ircam.fr/pub/alpine/edge/community
+xxxxxxxx
+fi
+apk update
+apk add hplip@edge || true
+apk add cups cups-filters
+rc-update add cupsd
+rc-service cupsd start
+sed -i 's/^lpadmin:x:105:$/lpadmin:x:105:root/' /etc/group
+sed -i -E 's/^(AllowTcpForwarding) no$/\1 yes\npermitopen="127.0.0.1:*"/' /etc/ssh/sshd_config
+rc-service sshd restart
+
+###############################################################################
+
+if ! grep -q '^@testing http://mirrors' /etc/apk/repositories; then
+  cat >> /etc/apk/repositories << 'xxxxxxxx'
+
+@testing http://mirrors.ircam.fr/pub/alpine/edge/testing
+xxxxxxxx
+fi
+apk update
+apk add avahi avahi-tools avahi2dns@testing
+rc-update add avahi-daemon
+rc-update add avahi2dns
+rc-service avahi-daemon start
+rc-service avahi2dns start
+if ! grep -q '^server=/local/' /etc/dnsmasq.conf; then
+  cat >> /etc/dnsmasq.conf << 'xxxxxxxx'
+
+server=/local/127.0.0.1#5354
+xxxxxxxx
+fi
+rc-service dnsmasq restart
