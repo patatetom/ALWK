@@ -58,6 +58,10 @@ cat > /home/browser/.xbindkeysrc << 'xxxxxxxx'
   Mod4 + 4
 xxxxxxxx
 
+if ! grep -q '^xbindkeys' /home/browser/.xinitrc; then
+  sed -i '1s/^/xbindkeys\n/' /home/browser/.xinitrc
+fi
+
 reboot
 ```
 
