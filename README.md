@@ -222,9 +222,9 @@ tty1::respawn:/bin/login -f browser
 #tty2::respawn:/sbin/getty 38400 tty2
 #ttyS0::respawn:/sbin/getty -L 0 ttyS0 vt100
 ::ctrlaltdel:clear
-::ctrlaltdel:/sbin/reboot -q > /dev/null
+::ctrlaltdel:/sbin/reboot > /dev/null 2>&1
 ::shutdown:clear
-::shutdown:/sbin/openrc shutdown -q > /dev/null
+::shutdown:/sbin/openrc shutdown -q > /dev/null 2>&1
 xxxxxxxx
 ```
 - configure login for `browser` user (graphics server automatic startup at login)
