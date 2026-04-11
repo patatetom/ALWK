@@ -112,9 +112,12 @@ apk add linux-firmware
 chmod -x /etc/grub.d/*
 chmod +x /etc/grub.d/00_header
 chmod +x /etc/grub.d/10_linux
-if ! grep -q 'GRUB_TIMEOUT_STYLE=hidden' /etc/default/grub; then
-  printf '\nGRUB_TIMEOUT_STYLE=hidden\nGRUB_DISABLE_OS_PROBER=true\n' \
-    >> /etc/default/grub
+if ! grep -q '^GRUB_TIMEOUT_STYLE=hidden' /etc/default/grub; then
+  cat >> /etc/default/grub << 'xxxxxxxx'
+
+GRUB_TIMEOUT_STYLE=hidden
+GRUB_DISABLE_OS_PROBER=true
+xxxxxxxx
 fi
 rc-update add local default
 cat > /etc/local.d/grub.echo.stop << 'xxxxxxxx'
