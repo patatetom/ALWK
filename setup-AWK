@@ -19,6 +19,8 @@ set -e
 ## 3 run script
 # sh /tmp/setup-AWK
 
+## see setup-extra-AWK to add audio, informations and printing to AWK
+
 ###############################################################################
 
 apk add dnsmasq
