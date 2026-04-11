@@ -218,7 +218,7 @@ cat > /home/browser/.jwmrc << 'xxxxxxxx'
 <StartupCommand>
 clear > /dev/tty1
 if [ -f "${urls:=/boot/efi/urls.txt}" ]; then
-  urls=$( grep -E '^(file|http(s)?)://' "$urls" )
+  urls=$( grep -E -o '^(file|http(s)?)://[^ ]+' "$urls" )
 else
   urls=file:///www/AWK.html
 fi
