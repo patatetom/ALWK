@@ -136,7 +136,7 @@ apk add hplip@edge || true
 apk add cups cups-filters
 rc-update add cupsd
 rc-service cupsd start
-sed -i 's/^lpadmin:x:105:$/lpadmin:x:105:root/' /etc/group
+sed -i -E 's/^(lpadmin:x:[^:]+):/\1:root/' /etc/group
 sed -i -E 's/^(AllowTcpForwarding) no$/\1 yes\npermitopen="127.0.0.1:*"/' /etc/ssh/sshd_config
 rc-service sshd restart
 
