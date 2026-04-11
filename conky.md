@@ -9,13 +9,15 @@ apk add conky
 # configure conky
 cat > /home/browser/.conkyrc << 'xxxxxxxx'
 conky.text = [[
+${color grey}HOST  :$color ${nodename}
 ${color grey}CLOCK :$color ${time %Y-%m-%d %H:%M}
-${color grey}UPTIME:$color $uptime
+${color grey}UPTIME:$color $uptime_short
 ${color grey}RAM   :$color $memperc%${goto 128}${membar 12}
 ${color grey}SWAP  :$color $swapperc%${goto 128}${swapbar 12}
 ${color grey}CPU   :$color $cpu%${goto 128}${cpubar 12}
 ${color grey}DISK  :$color $fs_used_perc%${goto 128}${fs_bar 12 /}
-${color grey}IP    :$color ${if_up eth0}${addr eth0}${else}${if_up wlan0}${addr wlan0}${endif}${endif}
+${if_up eth0}${color grey}ETH0  :$color ${addr eth0}${endif}
+${if_up wlan0}${color grey}WLAN0 :$color ${addr wlan0}${endif}
 ]]
 conky.config = {
  alignment = 'top_left',
@@ -50,7 +52,7 @@ conky.config = {
  show_graph_range = false,
  show_graph_scale = false,
  stippled_borders = 0,
- update_interval = 1.0,
+ update_interval = 3.0,
  uppercase = false,
  use_spacer = 'none',
  use_xft = true
@@ -58,7 +60,7 @@ conky.config = {
 xxxxxxxx
 
 # automatically start conky
-if ! grep -q conky /home/browser/.xinitrc; then
+if ! grep -q '^conky' /home/browser/.xinitrc; then
   sed -i '1s/^/conky\n/' /home/browser/.xinitrc
 fi
 ```
