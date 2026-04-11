@@ -43,11 +43,11 @@ cat > /home/browser/.xbindkeysrc << 'xxxxxxxx'
 "pactl set-sink-volume @DEFAULT_SINK@ +1000"
   XF86AudioRaiseVolume
 "pactl set-sink-volume @DEFAULT_SINK@ +1000"
-  Mod4 + 2
+  Mod4 + 3
 "pactl set-sink-volume @DEFAULT_SINK@ -1000"
   XF86AudioLowerVolume
 "pactl set-sink-volume @DEFAULT_SINK@ -1000"
-  Mod4 + 3
+  Mod4 + 2
 "pactl set-sink-mute @DEFAULT_SINK@ toggle"
   XF86AudioMute
 "pactl set-sink-mute @DEFAULT_SINK@ toggle"
