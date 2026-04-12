@@ -57,6 +57,7 @@ _«&nbsp;a web kiosk is a self-service computer terminal accessible to the publi
 > 💡 entire configuration process described below can be automated using [setup-AWK](setup-AWK) script 🚀
 
 - change domain name resolution
+> simple [AD blocker](adblock.md) can be easily added
 ```sh
 apk add dnsmasq
 rc-update add dnsmasq
