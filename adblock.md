@@ -32,3 +32,5 @@ fi
 ```
 
 > use `chmod -x /etc/local.d/hosts.block.start && rm /etc/hosts.blocked` to stop AD blocker
+
+![simple AD blocker](adblock.webp)
