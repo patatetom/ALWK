@@ -161,3 +161,24 @@ server=/local/127.0.0.1#5354
 xxxxxxxx
 fi
 rc-service dnsmasq restart
+
+###############################################################################
+
+cat > /etc/local.d/hosts.block.start << 'xxxxxxxx'
+#!/bin/sh
+block=/etc/hosts.blocked
+url=https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts
+[ -f "$block" ] || touch -t 190101010000 "$block"
+if [ "$( find "$block" -mtime +7 )" ]; then
+  wget -q -O "$block" "$url" 2> /dev/null &&
+  rc-service -q dnsmasq restart
+fi
+xxxxxxxx
+chmod +x /etc/local.d/hosts.block.start
+if ! grep -q '^addn-hosts=' /etc/dnsmasq.conf; then
+  cat >> /etc/dnsmasq.conf << 'xxxxxxxx'
+
+addn-hosts=/etc/hosts.blocked
+xxxxxxxx
+fi
+/etc/local.d/hosts.block.start
