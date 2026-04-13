@@ -104,7 +104,13 @@ depend()
 }
 start()
 {
-  hostname AWK-$( tr -d ':' < /sys/class/net/eth0/address )
+  host="AWK-$( tr -d ':' < /sys/class/net/eth0/address )"
+  echo "$host" > /etc/hostname
+  hostname "$host"
+  cat > /etc/hosts << oooooooo
+127.0.0.1 $host.localdomain $host localhost.localdomain localhost
+::1       localhost localhost.localdomain
+oooooooo
 }
 xxxxxxxx
 chmod +x /etc/init.d/machostname
