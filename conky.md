@@ -16,8 +16,13 @@ ${color grey}RAM   :$color $memperc%${goto 128}${membar 12}
 ${color grey}SWAP  :$color $swapperc%${goto 128}${swapbar 12}
 ${color grey}CPU   :$color $cpu%${goto 128}${cpubar 12}
 ${color grey}DISK  :$color $fs_used_perc%${goto 128}${fs_bar 12 /}
-${if_up eth0}${color grey}ETH0  :$color ${addr eth0}${endif}
-${if_up wlan0}${color grey}WLAN0 :$color ${addr wlan0}${endif}
+${if_up wlan0}\
+${color grey}WLAN0 :$color ${addr wlan0}\
+${else}\
+${if_up eth0}\
+${color grey}ETH0  :$color ${addr eth0}\
+${endif}\
+${endif}
 ]]
 conky.config = {
  alignment = 'top_left',
@@ -34,8 +39,8 @@ conky.config = {
  draw_shades = false,
  extra_newline = false,
  font = 'DejaVu Sans Mono:size=12',
- gap_x = 60,
- gap_y = 60,
+ gap_x = 8,
+ gap_y = 8,
  minimum_height = 5,
  minimum_width = 5,
  net_avg_samples = 2,
