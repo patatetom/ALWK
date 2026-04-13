@@ -103,6 +103,13 @@ sed -i -E \
   -e '/^\/dev\/(cdrom|usb)/d' \
   -e 's/iocharset=utf8/iocharset=iso8859-1,utf8/' \
   /etc/fstab
+cat > /etc/network/interfaces << 'xxxxxxxxxx'
+auto lo
+iface lo inet loopback
+auto eth0
+iface eth0 inet dhcp
+udhcpc_opts -t 1 -b -S
+xxxxxxxxxx
 ```
 - add widest hardware support (AWK on a USB device)
 ```sh
