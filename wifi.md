@@ -23,6 +23,15 @@ iwctl station wlan0 get-networks
 iwctl station wlan0 connect SSID psk
 # Type the network passphrase for SSID psk.
 # Passphrase: *********
+
+# add wlan0 to dhcp
+if ! grep -q '^auto wlan0' /etc/network/interfaces; then
+  cat >> /etc/network/interfaces << 'xxxxxxxx'
+
+auto wlan0
+iface wlan0 inet dhcp
+xxxxxxxx
+fi
 ```
 
 > `/var/lib/iwd/SSID.psk` will be created to enable next re-associations
