@@ -30,6 +30,7 @@ if ! grep -q '^auto wlan0' /etc/network/interfaces; then
 
 auto wlan0
 iface wlan0 inet dhcp
+udhcpc_opts -t 1 -b -S
 xxxxxxxx
 fi
 ```
