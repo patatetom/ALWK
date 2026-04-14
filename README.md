@@ -131,10 +131,9 @@ rc-update add local default
 cat > /etc/local.d/grub.echo.stop << 'xxxxxxxx'
 #!/bin/sh
 if grep -q 'Loading Linux lts' /boot/grub/grub.cfg; then
-  grub-mkconfig \
-    | sed -e "s/'Loading Linux lts/; echo '  Loading AWK/" \
-          -e '/Loading initial ramdisk/d' \
-    > /boot/grub/grub.cfg
+  sed -i /boot/grub/grub.cfg \
+      -e "s/'Loading Linux lts/; echo '  Loading AWK/" \
+      -e '/Loading initial ramdisk/d'
 fi
 xxxxxxxx
 chmod +x /etc/local.d/grub.echo.stop
