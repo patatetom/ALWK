@@ -83,7 +83,7 @@ rc-service networking restart
 ```
 - modify EFI System Partition (ESP)
 > installation is assumed to have been performed under EFI/UEFI<br/>
-> if this is not case, only run last command `dosfslabel …`
+> if this is not case, skip this section
 ```sh
 apk add sgdisk
 sgdisk /dev/sda \
@@ -93,6 +93,7 @@ sgdisk /dev/sda \
 apk add mtools
 echo 'drive e: file="/dev/sda1"' > /etc/mtools.conf
 mattrib +h +s e:/efi 2> /dev/null
+apk add dosfstools
 dosfslabel /dev/sda1 AWK > /dev/null 2>&1
 ```
 - make few minor changes
