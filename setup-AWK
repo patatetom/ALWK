@@ -55,6 +55,7 @@ sgdisk /dev/sda \
 apk add mtools
 echo 'drive e: file="/dev/sda1"' > /etc/mtools.conf
 mattrib +h +s e:/efi 2> /dev/null
+apk add dosfstools
 dosfslabel /dev/sda1 AWK > /dev/null 2>&1
 
 ###############################################################################
