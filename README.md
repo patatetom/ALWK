@@ -17,7 +17,16 @@ _«&nbsp;a web kiosk is a self-service computer terminal accessible to the publi
 
 - boot Alpine Linux ISO image on PC containing media storage for the future web kiosk
 - login as `root` without a password (empty password)
-- start installation with `KERNELOPTS="quiet mitigations=off" ROOTFS=btrfs setup-alpine`
+- start installation with
+```sh
+KERNELOPTS="quiet mitigations=off" \
+DISKLABEL=gpt \
+BOOTLOADER=grub \
+BOOTFS=vfat \
+ROOTFS=btrfs \
+setup-alpine
+```
+- and then set
   - keymap `fr`
   - keyboard layout `fr`
   - hostname `AWK`
@@ -28,7 +37,7 @@ _«&nbsp;a web kiosk is a self-service computer terminal accessible to the publi
   - sub timezone `Paris`
   - proxy `none`
   - ntp client `busybox`
-  - apk mirror `c` (community) `22` (mirros.ircam.fr)
+  - apk mirror `c` (community) `1` (mirros.ircam.fr)
   - user `browser`
   - full name `Chromium`
   - password `chromium`
