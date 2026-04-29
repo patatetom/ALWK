@@ -12,8 +12,8 @@ _«&nbsp;a web kiosk is a self-service computer terminal accessible to the publi
 
 > changes may be necessary (keyboard `fr`, disk `sda`, …)<br/>
 > **be sure to select correct disk if there are multiple available**<br/>
-> **Secure Boot must be disabled on EFI/UEFI platform**<br/>
-> prefer installation under EFI/UEFI, especially if it is performed to removable media<br/>
+> **installation must be performed under EFI/UEFI mode**<br/>
+> **Secure Boot must be disabled on EFI/UEFI platform**
 
 - boot Alpine Linux ISO image on PC containing media storage for the future web kiosk
 - login as `root` without a password (empty password)
@@ -53,7 +53,6 @@ _«&nbsp;a web kiosk is a self-service computer terminal accessible to the publi
 - boot AWK from media storage selected during installation
 - login as `root` with defined password
 
-> [!TIP]
 > 💡 entire configuration process described below can be automated using [setup-AWK](setup-AWK) script 🚀
 
 - change domain name resolution
@@ -82,8 +81,6 @@ echo 'RESOLV_CONF="/etc/resolv.dnsmasq"' > /etc/udhcpc/udhcpc.conf
 rc-service networking restart
 ```
 - modify EFI System Partition (ESP)
-> installation is assumed to have been performed under EFI/UEFI<br/>
-> if this is not case, skip this section
 ```sh
 apk add sgdisk
 sgdisk /dev/sda \
