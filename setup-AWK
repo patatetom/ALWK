@@ -47,16 +47,25 @@ rc-service networking restart
 
 ###############################################################################
 
-apk add sgdisk
-sgdisk /dev/sda \
-    --typecode=1:0700 --change-name=1:AWK \
-    --typecode=2:8200 --change-name=2:SWAP \
-    --typecode=3:8300 --change-name=3:ROOT
-apk add mtools
-echo 'drive e: file="/dev/sda1"' > /etc/mtools.conf
-mattrib +h +s e:/efi 2> /dev/null
-apk add dosfstools
-dosfslabel /dev/sda1 AWK > /dev/null 2>&1
+apk add sgdisk mtools dosfstools
+mkdir -p /boot/efi
+if [ -b /dev/sda4 ]; then
+    boot=/dev/sda2
+    sgdisk /dev/sda \
+        --typecode=1:ef02 --change-name=1:GRUB \
+        --typecode=2:0700 --change-name=2:AWK \
+        --typecode=3:8200 --change-name=3:SWAP \
+        --typecode=4:8300 --change-name=4:ROOT
+else
+    boot=/dev/sda1
+    sgdisk /dev/sda \
+        --typecode=1:0700 --change-name=1:AWK \
+        --typecode=2:8200 --change-name=2:SWAP \
+        --typecode=3:8300 --change-name=3:ROOT
+fi
+echo "drive x: file=\"$boot\"" > /etc/mtools.conf
+mattrib +h +s x:/efi 2> /dev/null
+dosfslabel "$boot" AWK > /dev/null 2>&1
 
 ###############################################################################
 
