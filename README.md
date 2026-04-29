@@ -40,7 +40,6 @@ _«&nbsp;a web kiosk is a self-service computer terminal accessible to the publi
   - disk `sda`
   - type `sys`
   - erase `y`
-- update system `apk update && apk upgrade`
 - reboot `reboot`
 
 
@@ -52,6 +51,7 @@ _«&nbsp;a web kiosk is a self-service computer terminal accessible to the publi
 
 - boot AWK from media storage selected during installation
 - login as `root` with defined password
+- update and upgrade system `apk update && apk upgrade`
 
 > 💡 entire configuration process described below can be automated using [setup-AWK](setup-AWK) script 🚀
 
