@@ -8,6 +8,13 @@ _«&nbsp;a web kiosk is a self-service computer terminal accessible to the publi
 
 
 
+> [!TIP]
+> a pre-built gzipped image of Alpine 3.23 / Chromium 148 / French UI is available [here](https://e.pcloud.link/publink/show?code=XZfFiiZDrKd4geKtXQisUAVGqLphzH5rWiV) (~2Gb).<br/>
+> this image (`452ff66751909b4573b69683b6079609e5dcf6a7`) must be «&nbsp;burned&nbsp;» to a disc-type media.<br/>
+> default `root` password (which should be changed) is `awk`.
+
+
+
 ## installation
 
 > changes may be necessary (keyboard `fr`, disk `sda`, …)<br/>
