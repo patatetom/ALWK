@@ -9,8 +9,8 @@ _«&nbsp;a web kiosk is a self-service computer terminal accessible to the publi
 
 
 > [!TIP]
-> a pre-built gzipped image of Alpine 3.23 / Chromium 148 / French UI is available [here](https://e.pcloud.link/publink/show?code=XZfFiiZDrKd4geKtXQisUAVGqLphzH5rWiV) (~2Gb).<br/>
-> this image (`452ff66751909b4573b69683b6079609e5dcf6a7`) must be «&nbsp;burned&nbsp;» to a disc-type media.<br/>
+> a pre-built gzipped image of AWK with Alpine 3.23 / Chromium 148 / French UI is available [here](https://edef4.pcloud.com/cBZdPnAPcZrUDHqA7ZZZQQhs5kZ2ZZzrRZkZG1RabkZg4ZApZLzZP9ZIRZj4ZMpZSHZl8ZJQZAgZyPZTkZxkZfFiiZ2pfHMNyLPvjvYaj535wrQ8tFEosy/awk.3.23-148-fr.img.gz) (~2Gb).<br/>
+> this image (`452ff66751909b4573b69683b6079609e5dcf6a7`) must be ungzipped (8Gb) and «&nbsp;burned&nbsp;» to a storage media.<br/>
 > default `root` password (which should be changed) is `awk`.
 
 
